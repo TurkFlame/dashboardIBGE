@@ -13,7 +13,7 @@ function App() {
     api.getPIBPerCapita().then(data => setPibPerCapita(data));
   }, []);
 
-  {/* Precisa de um lugar para o usuário poder colocar para filtrar os paises e a filtragem por data*/}
+  {/* Precisa de um lugar para o usuário poder colocar para filtrar o tipo de pesquisa que ele quer, exemplo: pibPerCapita, pibTotal, filtrar os paises e filtragem por data*/}
   return (
     <div id='Infos'>
       {/* Aqui vai ir os dados para construção do dashboard */}

@@ -11,23 +11,25 @@ export default function HomePage() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, // Adiciona a propriedade autoplay para fazer o carrossel se mover automaticamente
-    autoplaySpeed: 5000 // Define o intervalo de tempo em milissegundos (5 segundos)
+    autoplay: true,
+    autoplaySpeed: 5000
   };
 
   return (
-    <div className='carrousel'>
-      <Slider {...settings} style={{ width: '600px', height: '500px' }}>
-        <div>
-          <img src="image1.jpg" alt="Imagem 1" />
-        </div>
-        <div>
-          <img src="image2.jpg" alt="Imagem 2" />
-        </div>
-        <div>
-          <img src="image3.jpg" alt="Imagem 3" />
-        </div>
-      </Slider>
+    <div>
+      <div className='carrousel'>
+        <Slider {...settings} style={{ width: '600px', height: '500px' }}>
+          <div>
+            <img src="image1.jpg" alt="Imagem 1" />
+          </div>
+          <div>
+            <img src="image2.jpg" alt="Imagem 2" />
+          </div>
+          <div>
+            <img src="image3.jpg" alt="Imagem 3" />
+          </div>
+        </Slider>
+      </div>
     </div>
   );
 }

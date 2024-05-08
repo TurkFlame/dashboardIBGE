@@ -2,9 +2,8 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import '../style.css';
 
-export default function HomePage() {
+export default function Entrance() {
   const settings = {
     dots: true,
     infinite: true,

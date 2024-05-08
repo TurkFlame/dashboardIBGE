@@ -36,4 +36,16 @@ export default class Api {
       console.error("Erro ao buscar dados PIB per Capita:", error);
     }
   }
+
+  async getNameRanking() {
+    const url = `https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Erro ao buscar dados PIB per Capita:", error);
+    }
+  }
 }

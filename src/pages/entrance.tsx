@@ -15,7 +15,6 @@ export default function Entrance() {
   };
 
   return (
-    <div>
       <div className='carrousel'>
         <Slider {...settings} style={{ width: '600px', height: '500px' }}>
           <div>
@@ -29,6 +28,5 @@ export default function Entrance() {
           </div>
         </Slider>
       </div>
-    </div>
   );
 }

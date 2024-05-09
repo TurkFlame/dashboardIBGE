@@ -4,6 +4,8 @@ import Chart from 'chart.js/auto';
 function DashBoardName() {
     const [nameData, setNameData] = useState([]);
     const chartRef = useRef(null);
+    const lineChartRef = useRef(null); // Referência para o gráfico de linha
+    const scatterChartRef = useRef(null); // Referência para o gráfico de dispersão
     const pieChartRef = useRef(null); // Referência para o gráfico de pizza
 
     useEffect(() => {
@@ -50,6 +52,65 @@ function DashBoardName() {
                 },
                 options: {
                     scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de linha
+            if (lineChartRef.current) {
+                lineChartRef.current.destroy();
+            }
+
+            const lineCtx = document.getElementById('lineChart') as HTMLCanvasElement;
+            lineChartRef.current = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Frequência do nome Bryan por período',
+                        data: chartData.data,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de dispersão
+            if (scatterChartRef.current) {
+                scatterChartRef.current.destroy();
+            }
+
+            const scatterCtx = document.getElementById('scatterChart') as HTMLCanvasElement;
+            scatterChartRef.current = new Chart(scatterCtx, {
+                type: 'scatter',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Frequência do nome Bryan por período',
+                        data: chartData.data.map((value, index) => ({ x: index, y: value })),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        pointRadius: 5,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom'
+                        },
                         y: {
                             beginAtZero: true
                         }
@@ -125,9 +186,11 @@ function DashBoardName() {
     }, [nameData]);
 
     return (
-        <div>
-            <canvas id="nameChart" width="400" height="400"></canvas>
-            <canvas id="pieChart" width="400" height="400"></canvas> {/* Adiciona um canvas para o gráfico de pizza */}
+        <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+            <canvas id="nameChart" width="300" height="300" style={{ margin: '10px' }}></canvas>
+            <canvas id="lineChart" width="300" height="300" style={{ margin: '10px' }}></canvas> {/* Adiciona um canvas para o gráfico de linha */}
+            <canvas id="scatterChart" width="300" height="300" style={{ margin: '10px' }}></canvas> {/* Adiciona um canvas para o gráfico de dispersão */}
+            <canvas id="pieChart" width="300" height="300" style={{ margin: '10px' }}></canvas> {/* Adiciona um canvas para o gráfico de pizza */}
         </div>
     );
 }

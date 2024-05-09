@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Entrance from './pages/entrance';
+// import Entrance from './pages/entrance';
 import Dashboard from './pages/dashboard';
 import DashBoardName from './pages/dashboardName';
 // import Dashboards from './pages/dashboards';
@@ -14,6 +14,7 @@ export default function Router() {
             {/* <Route path="/loginLogout" element={<LoginLogout/>} />
             <Route path="/dashboards/" element={<Dashboards />} /> Tela para centralizar as dashboards  */}
             <Route path="/dashboard" element={<Dashboard />} /> {/* Tela para cada dashboard*/} 
+            <Route path="/getNameRanking" element={<Dashboard />} /> {/* Tela para cada dashboard*/} 
         </Routes>
     );
 }

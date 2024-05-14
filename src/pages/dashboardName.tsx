@@ -1,19 +1,25 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import Api from '@/services/api'
 
 function DashBoardName() {
-    const [nameData, setNameData] = useState([]);
-    const chartRef = useRef(null);
-    const lineChartRef = useRef(null); // Referência para o gráfico de linha
-    const scatterChartRef = useRef(null); // Referência para o gráfico de dispersão
-    const pieChartRef = useRef(null); // Referência para o gráfico de pizza
+    let [nameData, setNameData] = useState([]);
+    let chartRef = useRef(null);
+    let lineChartRef = useRef(null);
+    let scatterChartRef = useRef(null);
+    let pieChartRef = useRef(null);
+    let radarRef = useRef(null);
+    let areaChart = useRef(null);
+    let doughnutChart = useRef(null);
+    let polarChart = useRef(null);
+    let bubbleChart = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://servicodados.ibge.gov.br/api/v2/censos/nomes/bryan|elisa');
-                const data = await response.json();
-                setNameData(data);
+                const api = new Api();
+                const nameDataResponse = await api.getNameFrequency('bryan');
+                setNameData(nameDataResponse);
             } catch (error) {
                 console.error('Erro ao buscar dados da API:', error);
             }
@@ -32,18 +38,28 @@ function DashBoardName() {
         if (nameData.length > 0) {
             const chartData = formatChartData();
 
-            // Gráfico de barra
-            if (chartRef.current) {
+            if (chartRef.current || lineChartRef.current || scatterChartRef.current || pieChartRef.current || radarRef.current || areaChart.current || doughnutChart.current || polarChart.current || bubbleChart.current) {
                 chartRef.current.destroy();
+                lineChartRef.current.destroy();
+                scatterChartRef.current.destroy();
+                pieChartRef.current.destroy();
+                radarRef.current.destroy();
+                areaChart.current.destroy();
+                doughnutChart.current.destroy();
+                polarChart.current.destroy();
+                bubbleChart.current.destroy();
             }
 
+            const label = 'Frequência do nome Bryan por período'
+
+            //Gráfico de barra
             const ctx = document.getElementById('nameChart') as HTMLCanvasElement;
             chartRef.current = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: chartData.labels,
                     datasets: [{
-                        label: 'Frequência do nome Bryan por período',
+                        label: label,
                         data: chartData.data,
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
@@ -60,17 +76,13 @@ function DashBoardName() {
             });
 
             // Gráfico de linha
-            if (lineChartRef.current) {
-                lineChartRef.current.destroy();
-            }
-
             const lineCtx = document.getElementById('lineChart') as HTMLCanvasElement;
             lineChartRef.current = new Chart(lineCtx, {
                 type: 'line',
                 data: {
                     labels: chartData.labels,
                     datasets: [{
-                        label: 'Frequência do nome Bryan por período',
+                        label: label,
                         data: chartData.data,
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 2,
@@ -86,18 +98,14 @@ function DashBoardName() {
                 }
             });
 
-            // Gráfico de dispersão
-            if (scatterChartRef.current) {
-                scatterChartRef.current.destroy();
-            }
-
+            //Gráfico de disperção
             const scatterCtx = document.getElementById('scatterChart') as HTMLCanvasElement;
             scatterChartRef.current = new Chart(scatterCtx, {
                 type: 'scatter',
                 data: {
                     labels: chartData.labels,
                     datasets: [{
-                        label: 'Frequência do nome Bryan por período',
+                        label: label,
                         data: chartData.data.map((value, index) => ({ x: index, y: value })),
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -118,18 +126,14 @@ function DashBoardName() {
                 }
             });
 
-            // Gráfico de pizza em 3D
-            if (pieChartRef.current) {
-                pieChartRef.current.destroy();
-            }
-
+            //Gráfico de pizza
             const pieCtx = document.getElementById('pieChart') as HTMLCanvasElement;
             pieChartRef.current = new Chart(pieCtx, {
                 type: 'pie',
                 data: {
                     labels: chartData.labels,
                     datasets: [{
-                        label: 'Frequência do nome Bryan por período',
+                        label: label,
                         data: chartData.data,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.5)',
@@ -157,7 +161,7 @@ function DashBoardName() {
                         },
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
+                                label: function (context) {
                                     let label = context.label || '';
                                     if (label) {
                                         label += ': ';
@@ -182,15 +186,145 @@ function DashBoardName() {
                     }
                 }
             });
+
+            // Novo gráfico de radar
+            const radarCtx = document.getElementById('radarChart') as HTMLCanvasElement;
+            radarRef.current = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: label,
+                        data: chartData.data,
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Novo gráfico de área
+            const areaCtx = document.getElementById('areaChart') as HTMLCanvasElement;
+            areaChart.current = new Chart(areaCtx, {
+                type: 'line',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: label,
+                        data: chartData.data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Novo gráfico de doughnut
+            const doughnutCtx = document.getElementById('doughnutChart') as HTMLCanvasElement;
+            doughnutChart.current = new Chart(doughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: label,
+                        data: chartData.data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // Novo gráfico polar
+            const polarCtx = document.getElementById('polarChart') as HTMLCanvasElement;
+            polarChart.current = new Chart(polarCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: label,
+                        data: chartData.data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+           
+
+
+
         }
     }, [nameData]);
 
     return (
-        <div style={{ maxWidth: '500px', margin: '0 auto' }}>
-            <canvas id="nameChart" width="300" height="300" style={{ margin: '10px' }}></canvas>
-            <canvas id="lineChart" width="300" height="300" style={{ margin: '10px' }}></canvas> {/* Adiciona um canvas para o gráfico de linha */}
-            <canvas id="scatterChart" width="300" height="300" style={{ margin: '10px' }}></canvas> {/* Adiciona um canvas para o gráfico de dispersão */}
-            <canvas id="pieChart" width="300" height="300" style={{ margin: '10px' }}></canvas> {/* Adiciona um canvas para o gráfico de pizza */}
+        <div style={{ maxWidth: '250px', margin: '0 auto' }}>
+            <canvas id="nameChart"></canvas>
+            <canvas id="lineChart"></canvas>
+            <canvas id="scatterChart"></canvas>
+            <canvas id="pieChart"></canvas>
+            <canvas id="radarChart"></canvas>
+            <canvas id="areaChart"></canvas>
+            <canvas id="doughnutChart"></canvas>
+            <canvas id="polarChart"></canvas>
+            <canvas id="bubbleChart"></canvas>
         </div>
     );
 }

@@ -12,7 +12,6 @@ function DashBoardName() {
     let areaChart = useRef(null);
     let doughnutChart = useRef(null);
     let polarChart = useRef(null);
-    let bubbleChart = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,7 +37,7 @@ function DashBoardName() {
         if (nameData.length > 0) {
             const chartData = formatChartData();
 
-            if (chartRef.current || lineChartRef.current || scatterChartRef.current || pieChartRef.current || radarRef.current || areaChart.current || doughnutChart.current || polarChart.current || bubbleChart.current) {
+            if (chartRef.current || lineChartRef.current || scatterChartRef.current || pieChartRef.current || radarRef.current || areaChart.current || doughnutChart.current || polarChart.current) {
                 chartRef.current.destroy();
                 lineChartRef.current.destroy();
                 scatterChartRef.current.destroy();
@@ -47,7 +46,6 @@ function DashBoardName() {
                 areaChart.current.destroy();
                 doughnutChart.current.destroy();
                 polarChart.current.destroy();
-                bubbleChart.current.destroy();
             }
 
             const label = 'Frequência do nome Bryan por período'
@@ -324,7 +322,6 @@ function DashBoardName() {
             <canvas id="areaChart"></canvas>
             <canvas id="doughnutChart"></canvas>
             <canvas id="polarChart"></canvas>
-            <canvas id="bubbleChart"></canvas>
         </div>
     );
 }

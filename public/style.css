@@ -11,15 +11,20 @@ body {
 }
 
 .slide {
-    display: flex!important;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.slick-slider{
+.slick-slider {
     width: 500px;
     height: 300px;
-    display: flex!important;
+    display: flex !important;
     align-items: center;
+}
+
+.link-invisivel {
+    text-decoration: none !important;
+    color: inherit !important;
 }

@@ -1,8 +1,6 @@
 import React, { useState, useContext, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-//import { AuthContext } from '../../npcontexts/Auth';
-import './sign.css';
-
+import { AuthContext } from '../../contexts/Auth';
 const Entrada: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
@@ -36,8 +34,10 @@ const Entrada: React.FC = () => {
                         onChange={(e) => setSenha(e.target.value)}
                     />
                     <div className='centro'>
+                        <button type="submit" className='link-button espaco' disabled={loadingAuth}>
+                            {loadingAuth ? 'Carregando...' : 'Acessar'}
+                        </button>
                         <Link to="/cadastro" className='link-button espaco'>Cadastro</Link>
-                        <Link to="/dashboard" className='link-button espaco'>Acessar</Link>
                     </div>
                 </form>
             </div>

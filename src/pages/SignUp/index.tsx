@@ -1,11 +1,11 @@
-import { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from '../../services/firebaseConnection';
 import { AuthContext } from '../../contexts/Auth'
 import {
     createUserWithEmailAndPassword
 } from 'firebase/auth';
-import '../SignIn/sign.css'
+
 export default function SignUp() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -17,9 +17,8 @@ export default function SignUp() {
         e.preventDefault();
 
         if (name !== '' && email !== '' && password !== '') {
-            await signUp(email, password, name)
+            await signUp(email, password, name);
         }
-
     }
 
     async function novoUsuario() {
@@ -34,6 +33,7 @@ export default function SignUp() {
             }, 1000);
         } catch (error) {
             if (error.code === 'auth/weak-password') {
+                console.error('Senha fraca');
             } else if (error.code === 'auth/email-already-in-use') {
                 console.error('Email já existente');
             } else {
@@ -45,7 +45,6 @@ export default function SignUp() {
     return (
         <div className="container">
             <div className="login">
-
                 <form onSubmit={handleSubmit}>
                     <div className='login-h1'>
                         <h1>Nova conta</h1>
@@ -71,7 +70,6 @@ export default function SignUp() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-
                 </form>
                 <div className='centro'>
                     <Link to="/" className='link-button espaco'>Voltar</Link>

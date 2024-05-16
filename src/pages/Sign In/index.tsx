@@ -1,21 +1,20 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom'
-import { AuthContext } from '../../contexts/Auth';
-import './sign.css'
+import React, { useState, useContext, FormEvent } from 'react';
+import { Link } from 'react-router-dom';
+//import { AuthContext } from '../../npcontexts/Auth';
+import './sign.css';
 
-
-export default function Entrada() {
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+const Entrada: React.FC = () => {
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
 
     const { signIn, loadingAuth } = useContext(AuthContext);
 
-    async function handleSignIn(e) {
+    const handleSignIn = async (e: FormEvent) => {
         e.preventDefault();
         if (email !== '' && senha !== '') {
             await signIn(email, senha);
         }
-    }
+    };
 
     return (
         <div className='container'>
@@ -36,14 +35,14 @@ export default function Entrada() {
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
                     />
+                    <div className='centro'>
+                        <Link to="/cadastro" className='link-button espaco'>Cadastro</Link>
+                        <Link to="/dashboard" className='link-button espaco'>Acessar</Link>
+                    </div>
                 </form>
-                <div className='centro'>
-                    <Link to="/cadastro" className='link-button espaco'>Cadastro</Link>
-                    <Link to="/dashboard" className='link-button espaco'>Acessar</Link>
-                </div>
             </div>
         </div>
     );
+};
 
-
-}
+export default Entrada;

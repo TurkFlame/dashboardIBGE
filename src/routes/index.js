@@ -9,7 +9,7 @@ import Private from './private';
 export default function RoutesApp() {
     return (
         <Routes>
-            <Route path="/" element={<SignIn />} />
+            <Route path="/entrar" element={<SignIn />} />
             <Route path="/cadastro" element={<SignUp />} />
             <Route path="/dashboard" element={<Dashboard />} />
         </Routes>

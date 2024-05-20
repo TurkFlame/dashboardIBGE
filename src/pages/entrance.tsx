@@ -22,7 +22,7 @@ export default function Entrance() {
     <div className='carrousel'>
       <Slider className='slick-slider' {...settings}>
         <div className='slide'>
-          <Link to="/name" className='link-invisivel'>
+          <Link to="/page-name" className='link-invisivel'>
             <img src={IbgeImgNome} alt="Imagem 1" width={300} height={200} />
           </Link>
         </div>

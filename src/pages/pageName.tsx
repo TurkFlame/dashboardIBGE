@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import Api from '@/services/api'
 
-function DashBoardName() {
+function PageName() {
     const [nameData, setNameData] = useState([]);
     const chartRef = useRef(null);
     const lineChartRef = useRef(null);
@@ -91,7 +91,7 @@ function DashBoardName() {
 
 
     return (
-        <div>
+        <div className='container'>
             <div className='card'>
                 <canvas id="nameChart"></canvas>
             </div>
@@ -102,4 +102,4 @@ function DashBoardName() {
     );
 }
 
-export default DashBoardName;
+export default PageName;

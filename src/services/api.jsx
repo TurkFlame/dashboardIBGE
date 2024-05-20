@@ -60,6 +60,18 @@ export default class Api {
     }
   }
 
+  async getNameFrequencyRegion(location) {
+    const url = `https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=${location}`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Erro ao buscar dados da api de nomes:", error);
+    }
+  }
+
   async getMeshByStateID(stateID, period = null) {
     const baseUrl = new URL(`https://servicodados.ibge.gov.br/api/v3/malhas/estados/${stateID}`);
     const url = period? baseUrl.searchParams.append('periodo', period).toString() : baseUrl.toString();

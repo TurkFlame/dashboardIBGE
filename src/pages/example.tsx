@@ -313,7 +313,7 @@ function DashBoardName() {
     }, [nameData]);
 
     return (
-        <div style={{ maxWidth: '250px', margin: '5px auto' }}>
+        <div>
             <div className='card'>
                 <canvas id="nameChart"></canvas>
             </div>

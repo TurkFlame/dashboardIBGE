@@ -10,7 +10,7 @@ const Navbar = () => {
     return (
         <nav className="my-navbar">
             <div className="navbar-links">
-                <Link to="/" className="my-navbar-link">Nomes</Link>
+                <Link to="/page-name" className="my-navbar-link">Nomes</Link>
                 <Link to="/dashboards" className="my-navbar-link">Dashboards</Link>
             </div>
             <button className="my-navbar-logout" onClick={handleLogout}>Logout</button>

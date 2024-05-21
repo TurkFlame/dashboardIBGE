@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 import Api from "@/services/api";
-import Navbar from "./navbar";
+import Navbar from "../components/navbar";
 
 function PageName() {
   const [nameData, setNameData] = useState([]);

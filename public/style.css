@@ -1,7 +1,9 @@
+*{
+    padding: 0;
+}
 body {
     height: 90vh;
     width: 90%;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -106,12 +108,11 @@ caption {
     height: 250px;
 }
 
-.navbar {
+.my-navbar {
     background-color: #242424;
-    padding: 8px;
     position: fixed;
     top: 0;
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -120,24 +121,24 @@ caption {
     border-bottom: 1px solid #ececec;
 }
 
-.navbar-links {
+.my-navbar-links {
     display: flex;
     align-items: center;
 }
 
-.navbar-link {
+.my-navbar-link {
     margin-right: 50px;
     color: #fff;
     text-decoration: none;
     font-size: 16px;
 }
 
-.navbar-link:hover {
+.my-navbar-link:hover {
     text-decoration: none !important;
     color: #ccc;
 }
 
-.navbar-logout {
+.my-navbar-logout {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -146,6 +147,6 @@ caption {
     transition: color 0.3s ease;
 }
 
-.navbar-logout:hover {
+.my-navbar-logout:hover {
     color: #ccc;
 }

@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 import IbgeImgNome from '@/assets/images/ibge-img-nome.png';
-import Navbar from './navbar';
+import Navbar from '../components/navbar';
 
 export default function Entrance() {
   const settings = {

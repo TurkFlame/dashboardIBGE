@@ -11,7 +11,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<Entrance />} />
-      <Route path="/page-name" element={<PageName />} />
+      <Route path="/name" element={<PageName />} />
       {/* <Route path="/loginLogout" element={<LoginLogout/>} /> */}
       <Route path="/dashboards/" element={<Dashboards />} /> Tela para
       centralizar as dashboards

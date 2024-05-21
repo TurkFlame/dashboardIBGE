@@ -21,7 +21,7 @@ export default function Dashboards() {
                 <div className="card-body">
                   <h5 className="card-title">Nomes</h5>
                   <p className="card-text">Api de nomes</p>
-                  <a href="#" className="btn btn-primary">
+                  <a href="/name" className="btn btn-primary">
                     Conhecer
                   </a>
                 </div>
@@ -41,7 +41,7 @@ export default function Dashboards() {
                 <div className="card-body">
                   <h5 className="card-title">Nomes</h5>
                   <p className="card-text">Api de nomes</p>
-                  <a href="#" className="btn btn-primary">
+                  <a href="/name" className="btn btn-primary">
                     Conhecer
                   </a>
                 </div>
@@ -61,7 +61,7 @@ export default function Dashboards() {
                 <div className="card-body">
                   <h5 className="card-title">Nomes</h5>
                   <p className="card-text">Api de nomes</p>
-                  <a href="#" className="btn btn-primary">
+                  <a href="/name" className="btn btn-primary">
                     Conhecer
                   </a>
                 </div>
@@ -81,7 +81,7 @@ export default function Dashboards() {
                 <div className="card-body">
                   <h5 className="card-title">Nomes</h5>
                   <p className="card-text">Api de nomes</p>
-                  <a href="#" className="btn btn-primary">
+                  <a href="/name" className="btn btn-primary">
                     Conhecer
                   </a>
                 </div>

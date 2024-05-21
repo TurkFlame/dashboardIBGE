@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import Api from '@/services/api';
+import Navbar from './navbar';
 
 function PageName() {
     const [nameData, setNameData] = useState([]);
@@ -120,37 +121,40 @@ function PageName() {
     }, [nameData, locationData]);
 
     return (
-        <div className='container'>
-            <div className='row'>
-                <div className='col-md-6'>
-                    <div className='card-line mb-3'>
-                        <canvas id="lineChart"></canvas>
+        <div>
+            <Navbar />
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-md-6'>
+                        <div className='card-line mb-3'>
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                        <div className='card-line radar-chart-container'>
+                            <canvas id="radarChart" className='radar-chart'></canvas>
+                        </div>
                     </div>
-                    <div className='card-line radar-chart-container'>
-                        <canvas id="radarChart" className='radar-chart'></canvas>
-                    </div>
-                </div>
-                <div className='col-md-6'>
-                    <div className='card-table'>
-                        <table className="table">
-                            <caption>
-                                <b>Frequência do nome: </b> {nome}
-                            </caption>
-                            <thead>
-                                <tr>
-                                    <th>Período</th>
-                                    <th>Frequência</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {nameFrequencyData.length > 0 && nameFrequencyData[0].res.map((entry, index) => (
-                                    <tr key={index}>
-                                        <td>{entry.periodo.replace(/\[|\]/g, '')}</td>
-                                        <td>{entry.frequencia}</td>
+                    <div className='col-md-6'>
+                        <div className='card-table'>
+                            <table className="table">
+                                <caption>
+                                    <b>Frequência do nome: </b> {nome}
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th>Período</th>
+                                        <th>Frequência</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {nameFrequencyData.length > 0 && nameFrequencyData[0].res.map((entry, index) => (
+                                        <tr key={index}>
+                                            <td>{entry.periodo.replace(/\[|\]/g, '')}</td>
+                                            <td>{entry.frequencia}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -56,7 +56,7 @@ body {
 .col-md-6 {
     flex: 1;
     padding: 10px;
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .card-table {
@@ -104,4 +104,48 @@ caption {
     justify-content: center;
     align-items: center;
     height: 250px;
+}
+
+.navbar {
+    background-color: #242424;
+    padding: 8px;
+    position: fixed;
+    top: 0;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    z-index: 1000;
+    border-bottom: 1px solid #ececec;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-link {
+    margin-right: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar-link:hover {
+    text-decoration: none !important;
+    color: #ccc;
+}
+
+.navbar-logout {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.navbar-logout:hover {
+    color: #ccc;
 }

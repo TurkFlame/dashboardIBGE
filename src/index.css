@@ -1,6 +1,7 @@
-body{
+body {
   width: 100%;
   height: 100%;
+  background-color: #242424;
 }
 
 a {
@@ -8,6 +9,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -28,9 +30,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -41,9 +45,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
@@ -114,12 +120,13 @@ button:focus-visible {
   font-size: 24px;
 }
 
-.sector-info h2, p{
+.sector-info h2,
+p {
   margin: 5px;
 }
 
 
-.sector-info p{
+.sector-info p {
   font-size: 10px;
 }
 
@@ -176,7 +183,8 @@ caption {
   font-size: large;
 }
 
-.polar-chart-container, .radar-chart-container {
+.polar-chart-container,
+.radar-chart-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,7 +241,7 @@ caption {
   border-radius: 0px 6px 6px 0px;
   border: 2px solid transparent;
   background: linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)),
-              linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   box-shadow: -80px 80px 100px 0px #00000040;
 }
 

@@ -80,16 +80,18 @@ export default function PageSearch() {
   const formatChartData = (data) => {
     const yearCounts = data.reduce((acc, curr) => {
       curr.periodos.forEach(periodo => {
-        const year = periodo.periodo;
-        if (!acc[year]) {
-          acc[year] = 0;
+        const year = parseInt(periodo.periodo, 10);
+        if (year >= 1940 && year <= 2024) {
+          if (!acc[year]) {
+            acc[year] = 0;
+          }
+          acc[year]++;
         }
-        acc[year]++;
       });
       return acc;
     }, {});
 
-    const labels = Object.keys(yearCounts).sort();
+    const labels = Object.keys(yearCounts).sort((a, b) => parseInt(a) - parseInt(b)); // Garante a ordenação numérica
     const dataValues = Object.values(yearCounts);
     return { labels, dataValues };
   };

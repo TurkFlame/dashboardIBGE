@@ -4,8 +4,8 @@ import Entrance from '../pages/entrance';
 import Dashboard from '../pages/dashboard';
 import PageName from '../pages/pageName';
 import PageSearch from '../pages/pageSearch';
-import SignIn from '../pages/SignIn/index';
-import SignUp from '../pages/SignUp/index';
+import SignIn from '../pages/signIn';
+import SignUp from '../pages/signUp';
 import Dashboards from '../pages/dashboard';
 import Private from './private';
 

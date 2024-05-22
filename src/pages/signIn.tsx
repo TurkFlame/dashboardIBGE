@@ -1,7 +1,6 @@
 import React, { useState, useContext, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/Auth';
-import '../../../public/style.css'
+import { AuthContext } from '../contexts/Auth';
 const Entrada: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');

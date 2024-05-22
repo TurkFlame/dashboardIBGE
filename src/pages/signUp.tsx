@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { auth } from '../../services/firebaseConnection';
-import { AuthContext } from '../../contexts/Auth'
+import { auth } from '../services/firebaseConnection';
+import { AuthContext } from '../contexts/Auth'
 
 
 export default function SignUp() {

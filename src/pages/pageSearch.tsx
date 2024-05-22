@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Api from '@/services/api';
-import Navbar from './navbar';
+import Navbar from '@/components/navbar';
 import Chart from 'chart.js/auto';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCow, faMoneyBillWave, faVenusMars, faSeedling } from '@fortawesome/free-solid-svg-icons';
 
-export default function PageMaregrafo() {
+export default function PageSearch() {
   const [newData, setNewDataList] = useState([]);
   const [pecuariaCount, setPecuariaCount] = useState(0);
   const [financasCount, setFinancasCount] = useState(0);

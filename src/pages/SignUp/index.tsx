@@ -2,9 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from '../../services/firebaseConnection';
 import { AuthContext } from '../../contexts/Auth'
-import {
-    createUserWithEmailAndPassword
-} from 'firebase/auth';
+
 
 export default function SignUp() {
     const [name, setName] = useState('');
@@ -23,7 +21,7 @@ export default function SignUp() {
 
     async function novoUsuario() {
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+            /*await createUserWithEmailAndPassword(auth, email, password);*/
 
             setName('');
             setEmail('');

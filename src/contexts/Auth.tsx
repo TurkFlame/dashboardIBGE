@@ -1,12 +1,10 @@
 import React, { useState, createContext, useEffect, ReactNode } from 'react';
-import { auth, db, storage } from '../services/firebaseConnection';
+import { auth, db } from '../services/firebaseConnection';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-// Definindo a interface para o contexto de autenticação
 interface AuthContextProps {
   signed: boolean;
   user: User | null;
@@ -31,7 +29,7 @@ interface AuthProviderProps {
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
-function AuthProvider({ children }: AuthProviderProps) {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -143,5 +141,3 @@ function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   );
 }
-
-export default AuthProvider;

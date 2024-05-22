@@ -1,15 +1,14 @@
-import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../services/firebaseConnection';
-import { AuthContext } from '../../contexts/Auth'
-import {
-    createUserWithEmailAndPassword
-} from 'firebase/auth';
+import { AuthContext } from '../../contexts/Auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function SignUp() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const { signUp, loadingAuth } = useContext(AuthContext);
 
@@ -24,12 +23,11 @@ export default function SignUp() {
     async function novoUsuario() {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-
             setName('');
             setEmail('');
             setPassword('');
-            window.setTimeout(function () {
-                window.history.back();
+            setTimeout(() => {
+                navigate('/signin');
             }, 1000);
         } catch (error) {
             if (error.code === 'auth/weak-password') {
@@ -72,10 +70,12 @@ export default function SignUp() {
                     />
                 </form>
                 <div className='centro'>
-                    <Link to="/" className='link-button espaco'>Voltar</Link>
-                    <button onClick={novoUsuario}>{loadingAuth ? 'Carregando...' : 'Salvar'}</button>
+                    <Link to="/signin" className='link-button espaco'>Voltar</Link>
+                    <button onClick={novoUsuario} disabled={loadingAuth}>
+                        {loadingAuth ? 'Carregando...' : 'Salvar'}
+                    </button>
                 </div>
             </div>
         </div>
-    )
+    );
 }

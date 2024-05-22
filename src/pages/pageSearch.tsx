@@ -3,7 +3,7 @@ import Api from '@/services/api';
 import Navbar from '@/components/navbar';
 import Chart from 'chart.js/auto';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCow, faMoneyBillWave, faVenusMars, faSeedling, faBurger, faFaucetDrip } from '@fortawesome/free-solid-svg-icons';
+import { faCow, faMoneyBillWave, faVenusMars, faSeedling, faBurger, faFaucetDrip, faEarthAmerica } from '@fortawesome/free-solid-svg-icons';
 
 export default function PageSearch() {
   const [newData, setNewDataList] = useState([]);
@@ -13,6 +13,7 @@ export default function PageSearch() {
   const [agricolaCount, setAgricolaCount] = useState(0);
   const [morbidadeCount, setMorbidadeCount] = useState(0);
   const [SaneamentoCount, setSaneamentoCount] = useState(0);
+  const [pesquisasCount, setPesquisasCount] = useState(0);
   const lineChartRef = useRef(null);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function PageSearch() {
         const api = new Api();
         const response = await api.getPesquisas();
         setNewDataList(response);
+        setPesquisasCount(response.length)
 
         const pecuariaResponse = await api.getPesquisasPecuaria();
         setPecuariaCount(pecuariaResponse.periodos.length);
@@ -106,12 +108,24 @@ export default function PageSearch() {
     <div>
       <Navbar />
       <div className='container'>
+        <div className='col-md-6'>
+          <div className='card-line mb-3'>
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
         <div className='row'>
-          <div className='col-md-6'>
-            <div className='card-line mb-3'>
-              <canvas id="lineChart"></canvas>
+          <div className='col-md-12'>
+            <div className='card-label'>
+              <div className="sector-header">
+                <p><b>Total de Pesquisas Realizadas Pelo Ibge</b></p>
+                <FontAwesomeIcon icon={faEarthAmerica} className="icon" />
+              </div>
+              <div className="sector-info">
+                <h2><b>3.863.364.031</b></h2>
+              </div>
             </div>
           </div>
+
           <div className='col-md-6'>
             <div className='card-sector mb-3'>
               <div className="sector-header">
@@ -120,7 +134,6 @@ export default function PageSearch() {
               </div>
               <div className="sector-info">
                 <h2><b>{pecuariaCount}</b></h2>
-                <p>Quantidade de Pesquisas</p>
               </div>
             </div>
 
@@ -131,7 +144,6 @@ export default function PageSearch() {
               </div>
               <div className="sector-info">
                 <h2><b>{morbidadeCount}</b></h2>
-                <p>Quantidade de Pesquisas</p>
               </div>
             </div>
 
@@ -142,7 +154,6 @@ export default function PageSearch() {
               </div>
               <div className="sector-info">
                 <h2><b>{generoCount}</b></h2>
-                <p>Quantidade de Pesquisas</p>
               </div>
             </div>
 
@@ -155,7 +166,6 @@ export default function PageSearch() {
               </div>
               <div className="sector-info">
                 <h2><b>{agricolaCount}</b></h2>
-                <p>Quantidade de Pesquisas</p>
               </div>
             </div>
 
@@ -166,7 +176,6 @@ export default function PageSearch() {
               </div>
               <div className="sector-info">
                 <h2><b>{financasCount}</b></h2>
-                <p>Quantidade de Pesquisas</p>
               </div>
             </div>
 
@@ -178,7 +187,6 @@ export default function PageSearch() {
               </div>
               <div className="sector-info">
                 <h2><b>{SaneamentoCount}</b></h2>
-                <p>Quantidade de Pesquisas</p>
               </div>
             </div>
 

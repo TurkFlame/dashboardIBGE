@@ -106,6 +106,27 @@ button:focus-visible {
   text-align: center;
 }
 
+.card-label {
+  width: 500px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  background-color: #ececec;
+  margin: 10px auto;
+  color: #000;
+  text-align: center;
+}
+
+.card-label-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-label .icon{
+  font-size: 32px;
+}
+
 .sector-header {
   display: flex;
   justify-content: space-between;
@@ -147,6 +168,10 @@ p {
 .col-md-6 {
   flex: 1;
   padding: 10px;
+}
+
+.col-md-12 {
+
   margin-top: 100px;
 }
 
@@ -321,4 +346,20 @@ input::placeholder {
 
 .cadastro:hover {
   background-color: grey;
+}
+
+.card-top {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  background-color: #ececec;
+  margin: 10px auto;
+  color: #000;
+}
+
+.card-top h2 {
+  margin: 0;
+  font-size: 1.5em;
 }

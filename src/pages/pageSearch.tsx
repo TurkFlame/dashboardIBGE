@@ -3,7 +3,7 @@ import Api from '@/services/api';
 import Navbar from '@/components/navbar';
 import Chart from 'chart.js/auto';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCow, faMoneyBillWave, faVenusMars, faSeedling } from '@fortawesome/free-solid-svg-icons';
+import { faCow, faMoneyBillWave, faVenusMars, faSeedling, faBurger, faFaucetDrip } from '@fortawesome/free-solid-svg-icons';
 
 export default function PageSearch() {
   const [newData, setNewDataList] = useState([]);
@@ -11,6 +11,8 @@ export default function PageSearch() {
   const [financasCount, setFinancasCount] = useState(0);
   const [generoCount, setGeneroCount] = useState(0);
   const [agricolaCount, setAgricolaCount] = useState(0);
+  const [morbidadeCount, setMorbidadeCount] = useState(0);
+  const [SaneamentoCount, setSaneamentoCount] = useState(0);
   const lineChartRef = useRef(null);
 
   useEffect(() => {
@@ -31,6 +33,12 @@ export default function PageSearch() {
 
         const agricolaResponse = await api.getPesquisasAgricola();
         setAgricolaCount(agricolaResponse.periodos.length);
+
+        const morbidadeResponse = await api.getPesquisasMorbidade();
+        setMorbidadeCount(morbidadeResponse.periodos.length);
+
+        const saneamentoResponse = await api.getPesquisasSaneamento();
+        setSaneamentoCount(saneamentoResponse.periodos.length);
       } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
       }
@@ -116,11 +124,22 @@ export default function PageSearch() {
 
             <div className='card-sector mb-3'>
               <div className="sector-header">
-                <p><b>Finanças Públicas</b></p>
-                <FontAwesomeIcon icon={faMoneyBillWave} className="icon" />
+                <p><b>Morbidade</b></p>
+                <FontAwesomeIcon icon={faBurger} className="icon" />
               </div>
               <div className="sector-info">
-                <h2><b>{financasCount}</b></h2>
+                <h2><b>{morbidadeCount}</b></h2>
+                <p>Quantidade de Pesquisas</p>
+              </div>
+            </div>
+
+            <div className='card-sector mb-3'>
+              <div className="sector-header">
+                <p><b>Gêneros</b></p>
+                <FontAwesomeIcon icon={faVenusMars} className="icon" />
+              </div>
+              <div className="sector-info">
+                <h2><b>{generoCount}</b></h2>
                 <p>Quantidade de Pesquisas</p>
               </div>
             </div>
@@ -140,11 +159,23 @@ export default function PageSearch() {
 
             <div className='card-sector mb-3'>
               <div className="sector-header">
-                <p><b>Gêneros</b></p>
-                <FontAwesomeIcon icon={faVenusMars} className="icon" />
+                <p><b>Finanças Públicas</b></p>
+                <FontAwesomeIcon icon={faMoneyBillWave} className="icon" />
               </div>
               <div className="sector-info">
-                <h2><b>{generoCount}</b></h2>
+                <h2><b>{financasCount}</b></h2>
+                <p>Quantidade de Pesquisas</p>
+              </div>
+            </div>
+
+
+            <div className='card-sector mb-3'>
+              <div className="sector-header">
+                <p><b>Saneamento Básico</b></p>
+                <FontAwesomeIcon icon={faFaucetDrip} className="icon" />
+              </div>
+              <div className="sector-info">
+                <h2><b>{SaneamentoCount}</b></h2>
                 <p>Quantidade de Pesquisas</p>
               </div>
             </div>

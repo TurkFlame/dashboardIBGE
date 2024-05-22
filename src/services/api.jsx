@@ -244,4 +244,20 @@ export default class Api {
     }
   }
 
+  async getPesquisasSaneamento() {
+    const url = `https://servicodados.ibge.gov.br/api/v1/pesquisas/30`;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Erro na resposta da API');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Erro ao buscar dados da API:", error);
+      throw error;
+    }
+  }
+
 }

@@ -1,7 +1,7 @@
 export default class Api {
   // Exemplo de uso de this.filter, você precisará definir isso ou removê-lo se não for necessário
   filter = {
-    countries: ['BR', 'US', 'CA'] // Exemplo de países
+    countries: ["BR", "US", "CA"], // Exemplo de países
   };
 
   async getTotalPIB() {
@@ -72,12 +72,28 @@ export default class Api {
     }
   }
 
+  async getLocations() {
+    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/distritos`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Erro ao buscar dados da api de nomes:", error);
+    }
+  }
+
   async getMeshByStateID(stateID, period = null) {
-    const baseUrl = new URL(`https://servicodados.ibge.gov.br/api/v3/malhas/estados/${stateID}`);
-    const url = period ? baseUrl.searchParams.append('periodo', period).toString() : baseUrl.toString();
+    const baseUrl = new URL(
+      `https://servicodados.ibge.gov.br/api/v3/malhas/estados/${stateID}`
+    );
+    const url = period
+      ? baseUrl.searchParams.append("periodo", period).toString()
+      : baseUrl.toString();
 
     const headers = {
-      'Content-Type': 'image/svg+xml'
+      "Content-Type": "image/svg+xml",
     };
 
     try {
@@ -93,11 +109,15 @@ export default class Api {
   }
 
   async getMeshByCountryId(countryId, period = null) {
-    const baseUrl = new URL(`https://servicodados.ibge.gov.br/api/v3/malhas/paises/${countryId}`);
-    const url = period ? baseUrl.searchParams.append('periodo', period).toString() : baseUrl.toString();
+    const baseUrl = new URL(
+      `https://servicodados.ibge.gov.br/api/v3/malhas/paises/${countryId}`
+    );
+    const url = period
+      ? baseUrl.searchParams.append("periodo", period).toString()
+      : baseUrl.toString();
 
     const headers = {
-      'Content-Type': 'image/svg+xml'
+      "Content-Type": "image/svg+xml",
     };
 
     try {

@@ -41,6 +41,42 @@ body {
     margin: 10px;
 }
 
+.card-sector {
+    width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    background-color: #ececec;
+    margin: 10px auto;
+    color: #000;
+    text-align: center;
+}
+
+.sector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sector-header h3 {
+    margin: 0;
+}
+
+.icon {
+    font-size: 24px;
+}
+
+.sector-info h2, p{
+    margin: 5px;
+}
+
+
+.sector-info p{
+    font-size: 10px;
+}
+
+
+
 .container {
     display: flex;
     justify-content: center;

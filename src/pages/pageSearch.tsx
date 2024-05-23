@@ -3,7 +3,7 @@ import Api from '@/services/api';
 import Navbar from '@/components/navbar';
 import Chart from 'chart.js/auto';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCow, faMoneyBillWave, faVenusMars, faSeedling, faBurger, faFaucetDrip, faEarthAmerica } from '@fortawesome/free-solid-svg-icons';
+import { faCow, faMoneyBillWave, faVenusMars, faSeedling, faBurger, faFaucetDrip, faEarthAmerica, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function PageSearch() {
   const [newData, setNewDataList] = useState([]);
@@ -22,7 +22,7 @@ export default function PageSearch() {
         const api = new Api();
         const response = await api.getPesquisas();
         setNewDataList(response);
-        setPesquisasCount(response.length)
+        setPesquisasCount(response.length);
 
         const pecuariaResponse = await api.getPesquisasPecuaria();
         setPecuariaCount(pecuariaResponse.periodos.length);
@@ -62,7 +62,7 @@ export default function PageSearch() {
       data: {
         labels: chartData.labels,
         datasets: [{
-          label: 'Quantidade de Pesquisas realizadas pelo IBGE',
+          label: 'Quantidade de setores atingidos pelo IBGE no Brasil',
           data: chartData.dataValues,
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 2,
@@ -108,20 +108,39 @@ export default function PageSearch() {
     <div>
       <Navbar />
       <div className='container'>
-        <div className='col-md-6'>
-          <div className='card-line mb-3'>
-            <canvas id="lineChart"></canvas>
-          </div>
-        </div>
         <div className='row'>
+
           <div className='col-md-12'>
             <div className='card-label'>
               <div className="sector-header">
-                <p><b>Total de Pesquisas Realizadas Pelo Ibge</b></p>
+                <p><b>Total de Pesquisas Realizadas Pelo IBGE</b></p>
                 <FontAwesomeIcon icon={faEarthAmerica} className="icon" />
               </div>
               <div className="sector-info">
                 <h2><b>3.863.364.031</b></h2>
+              </div>
+            </div>
+          </div>
+
+
+          <div className='col-md-6'>
+            <div className='card-line'>
+              <canvas id="lineChart"></canvas>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div className='row'>
+          <div className='col-md-12'>
+            <div className='card-label'>
+              <div className="sector-header">
+                <p><b>Quantidade de Anos em que o IBGE conduziu pesquisas</b></p>
+                <FontAwesomeIcon icon={faCalendarCheck} className="icon" />
+              </div>
+              <div className="sector-info">
+                <h2><b>{pesquisasCount}</b></h2>
               </div>
             </div>
           </div>

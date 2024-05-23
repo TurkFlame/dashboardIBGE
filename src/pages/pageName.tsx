@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 import Api from "@/services/api";
-import Navbar from "../components/navbar";
 
 function PageName() {
   const [nameData, setNameData] = useState([]);
@@ -144,7 +143,6 @@ function PageName() {
 
   return (
     <>
-      <Navbar></Navbar>
       <div className="container">
         <div className="row">
           <div className="col-md-6">

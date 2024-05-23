@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Api from '@/services/api';
-import Navbar from '@/components/navbar';
 import Chart from 'chart.js/auto';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCow, faMoneyBillWave, faVenusMars, faSeedling } from '@fortawesome/free-solid-svg-icons';
@@ -94,7 +93,6 @@ export default function PageSearch() {
 
   return (
     <div>
-      <Navbar />
       <div className='container'>
         <div className='row'>
           <div className='col-md-6'>

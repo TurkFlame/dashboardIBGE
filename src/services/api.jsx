@@ -1,36 +1,42 @@
 export default class Api {
-  // Exemplo de uso de this.filter, você precisará definir isso ou removê-lo se não for necessário
-  filter = {
-    countries: ["BR", "US", "CA"], // Exemplo de países
-  };
-
-  async getTotalPIB() {
-    const filters = this.filter;
-    const countries = filters.countries;
+  async getTotalPIB(
+    countries = [
+      "AR",
+      "US",
+      "AF",
+      "BR",
+      "CN",
+      "CU",
+      "CO",
+      "GB",
+      "PT",
+      "PE",
+      "CL",
+      "GR",
+      "FR",
+      "MX",
+      "IND",
+    ]
+  ) {
     const countriesStr = countries.join("|");
     const url = `https://servicodados.ibge.gov.br/api/v1/paises/${countriesStr}/indicadores/77827`;
 
     try {
       const response = await fetch(url);
       const data = await response.json();
-      const indicador = data[0].indicador;
-      const paises = data[0].series;
-      return { indicador, paises };
+      return data;
     } catch (error) {
       console.error("Erro ao buscar dados PIB total:", error);
     }
   }
 
-  async getPIBPerCapita(countries) {
-    const countriesStr = countries.join("|");
-    const url = `https://servicodados.ibge.gov.br/api/v1/paises/${countriesStr}/indicadores/77823`;
+  async getPIBPerCapita(countries = "BR") {
+    const url = `https://servicodados.ibge.gov.br/api/v1/paises/${countries}/indicadores/77823`;
 
     try {
       const response = await fetch(url);
       const data = await response.json();
-      const indicador = data[0].indicador;
-      const paises = data[0].series;
-      return { indicador, paises };
+      return data;
     } catch (error) {
       console.error("Erro ao buscar dados PIB per Capita:", error);
     }
@@ -138,7 +144,7 @@ export default class Api {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro na resposta da API');
+        throw new Error("Erro na resposta da API");
       }
       const data = await response.json();
       return data;
@@ -154,7 +160,23 @@ export default class Api {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro na resposta da API');
+        throw new Error("Erro na resposta da API");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Erro ao buscar dados da API:", error);
+      throw error;
+    }
+  }
+
+  async getPesquisasAgregado() {
+    const url = `https://servicodados.ibge.gov.br/api/v3/agregados`;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Erro na resposta da API");
       }
       const data = await response.json();
       return data;
@@ -186,7 +208,7 @@ export default class Api {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro na resposta da API');
+        throw new Error("Erro na resposta da API");
       }
       const data = await response.json();
       return data;
@@ -202,7 +224,7 @@ export default class Api {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro na resposta da API');
+        throw new Error("Erro na resposta da API");
       }
       const data = await response.json();
       return data;
@@ -218,7 +240,7 @@ export default class Api {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro na resposta da API');
+        throw new Error("Erro na resposta da API");
       }
       const data = await response.json();
       return data;
@@ -234,7 +256,7 @@ export default class Api {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro na resposta da API');
+        throw new Error("Erro na resposta da API");
       }
       const data = await response.json();
       return data;
@@ -250,7 +272,7 @@ export default class Api {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro na resposta da API');
+        throw new Error("Erro na resposta da API");
       }
       const data = await response.json();
       return data;

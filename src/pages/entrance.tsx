@@ -4,8 +4,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 import IbgeImgNome from '@/assets/images/ibge-img-nome.png';
-import Navbar from '@/components/navbar';
-import { ArrowBigDown } from 'lucide-react';
 
 export default function Entrance() {
   const settings = {
@@ -22,7 +20,6 @@ export default function Entrance() {
 
   return (
     <div className='container-carrousel'>
-      <Navbar />
       <Slider className='slick-slider' {...settings}>
         <div className='slide'>
           <Link to="/page-name" className='link-invisivel'>

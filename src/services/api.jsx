@@ -1,5 +1,23 @@
 export default class Api {
-  async getTotalPIB(countries = ["AR",'US' ,'AF',"BR",'CN', 'CU', 'CO', 'GB', 'PT', 'PE', 'CL', 'GR', 'FR', 'MX', 'IND']) {
+  async getTotalPIB(
+    countries = [
+      "AR",
+      "US",
+      "AF",
+      "BR",
+      "CN",
+      "CU",
+      "CO",
+      "GB",
+      "PT",
+      "PE",
+      "CL",
+      "GR",
+      "FR",
+      "MX",
+      "IND",
+    ]
+  ) {
     const countriesStr = countries.join("|");
     const url = `https://servicodados.ibge.gov.br/api/v1/paises/${countriesStr}/indicadores/77827`;
 
@@ -12,9 +30,8 @@ export default class Api {
     }
   }
 
-  async getPIBPerCapita(countries = ["AR",'US' ,'AF',"BR",'CN', 'CU', 'CO', 'GB', 'PT', 'PE', 'CL', 'GR', 'FR', 'MX', 'IND']) {
-    const countriesStr = countries.join("|");
-    const url = `https://servicodados.ibge.gov.br/api/v1/paises/${countriesStr}/indicadores/77823`;
+  async getPIBPerCapita(countries = "BR") {
+    const url = `https://servicodados.ibge.gov.br/api/v1/paises/${countries}/indicadores/77823`;
 
     try {
       const response = await fetch(url);

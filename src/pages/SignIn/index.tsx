@@ -1,18 +1,19 @@
 import React, { useState, useContext, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/Auth';
+import { AuthContext } from '@/contexts/Auth';
 import '../../../public/style.css';
 
 const Entrada: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
 
-  const { signIn, loadingAuth } = useContext(AuthContext);
+  let { signIn, loadingAuth } = useContext(AuthContext);
 
   const handleSignIn = async (e: FormEvent) => {
     e.preventDefault();
     if (email !== '' && senha !== '') {
-      await signIn(email, senha);
+        await signIn(email, senha);
+        console.log('aqui!');
     }
   };
 

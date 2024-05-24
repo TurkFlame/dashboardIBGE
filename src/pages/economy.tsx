@@ -121,7 +121,6 @@ export default function Economy() {
     PM: "Saint Pierre e Miquelon",
     AS: "Samoa Americana",
     WS: "Samoa Ocidental",
-    SH: "Santa Helena",
     LC: "Santa Lúcia",
     SM: "São Marino",
     VC: "São Vicente e Granadinas",
@@ -133,6 +132,8 @@ export default function Economy() {
   };
 
   const fetchData = async (sigla) => {
+
+    setIsLoaded(false);
     const api = new Api();
 
     const pibData = await api.getTotalPIB();
@@ -145,7 +146,7 @@ export default function Economy() {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData("BR");
   }, []);
 
   useEffect(() => {
@@ -231,28 +232,20 @@ export default function Economy() {
                 <div className="card-line mb-3">
                   <canvas id="lineChart"></canvas>
                 </div>
-                <div className="card-line radar-chart-container">
-                  <canvas id="radarChart" className="radar-chart"></canvas>
-                </div>
                 <select
                   onChange={(e) => {
-                    let currentLocationNameInnerHtml = document.getElementById(
+                    let currentLocationName = document.getElementById(
                       e.target.value
-                    ).innerHTML;
-                    setCurrentCountry(currentLocationNameInnerHtml);
-                    const api = new Api();
-                    fetchData(currentLocationNameInnerHtml);
+                    );
+                    setCurrentCountry(currentLocationName.innerHTML);
+                    fetchData(currentLocationName.id);
                   }}
                   name="locations"
                   id="locations_select"
                 >
-                  {Object.keys(countries).map((element, index) => (
-                    <option
-                      key={element}
-                      id={element}
-                      value={element}
-                    >
-                      {element}
+                  {Object.keys(countries).map((element) => (
+                    <option key={element} id={element} value={element}>
+                      {countries[element]}
                     </option>
                   ))}
                 </select>

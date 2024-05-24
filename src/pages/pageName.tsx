@@ -142,18 +142,15 @@ function PageName() {
   }, [nameData, locationData]);
 
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <div className="card-line mb-3">
-              <canvas id="lineChart"></canvas>
-            </div>
-            <div className="card-line radar-chart-container">
-              <canvas id="radarChart" className="radar-chart"></canvas>
-            </div>
+    <div className='container'>
+      <div className='row'>
+
+        <div className='col-md-12'>
+          <div className="card-line mb-3">
+            <canvas id="lineChart"></canvas>
           </div>
-          <div>
+
+          <div className="card-line mb-3">
             <label>Escolha uma localidade:</label>
             <select
               onChange={(e) => {
@@ -176,6 +173,18 @@ function PageName() {
                 </option>
               ))}
             </select>
+          </div>
+
+          <div className="card-line radar-chart-container">
+            <canvas id="radarChart" className="radar-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-md-12'>
+
+          <div className="card-line mb-3">
             <label>Escolha um nome:</label>
             <input type="text" id="name-input" />
             <button
@@ -189,35 +198,35 @@ function PageName() {
               Submit
             </button>
           </div>
-          <div className="col-md-6">
-            <div className="card-table">
-              <table className="table">
-                <caption>
-                  <b>Frequência do nome: </b>
-                  <br />
-                  {currentName}
-                </caption>
-                <thead>
-                  <tr>
-                    <th>Período</th>
-                    <th>Frequência</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {nameFrequencyData.length > 0 &&
-                    nameFrequencyData[0].res.map((entry, index) => (
-                      <tr key={index}>
-                        <td>{entry.periodo.replace(/\[|\]/g, "")}</td>
-                        <td>{entry.frequencia}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
+
+          <div className="card-table">
+            <table className="table">
+              <caption>
+                <b>Frequência do nome: </b>
+                <br />
+                {currentName}
+              </caption>
+              <thead>
+                <tr>
+                  <th>Período</th>
+                  <th>Frequência</th>
+                </tr>
+              </thead>
+              <tbody>
+                {nameFrequencyData.length > 0 &&
+                  nameFrequencyData[0].res.map((entry, index) => (
+                    <tr key={index}>
+                      <td>{entry.periodo.replace(/\[|\]/g, "")}</td>
+                      <td>{entry.frequencia}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
           </div>
+
         </div>
       </div>
-    </>
+    </div >
   );
 }
 

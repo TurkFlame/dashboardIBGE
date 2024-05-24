@@ -6,10 +6,11 @@ import '../../../public/style.css';
 const Entrada: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
-
-  const { signIn, loadingAuth } = useContext(AuthContext);
-
+  
+  const { loadingAuth } = useContext(AuthContext);
+  
   const handleSignIn = async (e: FormEvent) => {
+    const { signIn } = useContext(AuthContext);
     e.preventDefault();
     if (email !== '' && senha !== '') {
       await signIn(email, senha);

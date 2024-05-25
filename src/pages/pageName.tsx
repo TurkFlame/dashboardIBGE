@@ -183,24 +183,21 @@ function PageName() {
 
       <div className='row'>
         <div className='col-md-12'>
-
-          <div className="card-line mb-3">
-            <label>Escolha um nome:</label>
-            <input type="text" id="name-input" />
-            <button
-              onClick={() =>
-                fetchNameFrequency(
-                  (document.getElementById("name-input") as HTMLInputElement)
-                    .value
-                )
-              }
-            >
-              Submit
-            </button>
-          </div>
-
-          <div className="card-table">
-            <table className="table">
+          <div>
+            <div className="card-line-name mb-3">
+              <label>Escolha um nome:</label>
+              <input type="text" id="name-input" />
+              <button
+                onClick={() =>
+                  fetchNameFrequency(
+                    (document.getElementById("name-input") as HTMLInputElement)
+                      .value
+                  )
+                }
+              >
+                Submit
+              </button>
+              <table>
               <caption>
                 <b>Frequência do nome: </b>
                 <br />
@@ -222,8 +219,8 @@ function PageName() {
                   ))}
               </tbody>
             </table>
+            </div>
           </div>
-
         </div>
       </div>
     </div >

@@ -1,47 +1,39 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 import IbgeImgNome from '@/assets/images/ibge-img-nome.png';
+import IbgeImgPesquisa from '@/assets/images/ibge-img-pesquisa.png';
+import IbgeImgEconomia from '@/assets/images/ibge-img-economia.png';
+import '../index.css';
 
 export default function Entrance() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    centerMode: true,
-    centerPadding: '0px'
-  };
-
   return (
-    <div className='container-carrousel'>
-      <Slider className='slick-slider' {...settings}>
-        <div className='slide'>
+    <>
+      <div className='container'>
+        <div className='grid-item'>
           <Link to="/page-name" className='link-invisivel'>
-            <img src={IbgeImgNome} alt="Imagem 1" />
+            <div className='image-title-container'>
+              <img src={IbgeImgNome} alt="Imagem 1" className='image' />
+            </div>
+            <h3 className='title'>PESQUISAS NOMES IBGE</h3>
           </Link>
         </div>
-        <div className='slide'>
-          <Link to="/page-name" className='link-invisivel'>
-            <img src={IbgeImgNome} alt="Imagem 1" />
+        <div className='grid-item'>
+          <Link to="/page-search" className='link-invisivel'>
+            <div className='image-title-container'>
+              <img src={IbgeImgPesquisa} alt="Imagem 1" className='image' />
+            </div>
+            <h3 className='title'>PESQUISAS FEITAS DO IBGE</h3>
           </Link>
         </div>
-        <div className='slide'>
-          <Link to="/page-name" className='link-invisivel'>
-            <img src={IbgeImgNome} alt="Imagem 1" />
+        <div className='grid-item'>
+          <Link to="/page-economy" className='link-invisivel'>
+            <div className='image-title-container'>
+              <img src={IbgeImgEconomia} alt="Imagem 1" className='image' />
+            </div>
+            <h3 className='title'>PESQUISAS ECONOMIA IBGE</h3>
           </Link>
         </div>
-        <div className='slide'>
-          <Link to="/page-name" className='link-invisivel'>
-            <img src={IbgeImgNome} alt="Imagem 1" />
-          </Link>
-        </div>
-      </Slider>
-    </div>
+      </div>
+    </>
   );
 }

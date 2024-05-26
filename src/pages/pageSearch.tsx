@@ -105,7 +105,7 @@ export default function PageSearch() {
 
   return (
     <div>
-      <div className='container'>
+      <div className='container' id='search-container'>
         <div className='row'>
 
           <div className='col-md-12'>

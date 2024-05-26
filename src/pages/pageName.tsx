@@ -48,9 +48,10 @@ function PageName() {
 
   const fetchRegions = async () => {
     try {
-      const locations = await api.getLocations();
-      console.log(locations);
-      setLocations(locations);
+      if (locations.length < 1) {
+        const locations_response = await api.getLocations();
+        setLocations(locations_response);
+      }
     } catch (error) {
       console.error("Erro ao buscar dados da API:", error);
     }
@@ -64,7 +65,7 @@ function PageName() {
   }, []);
 
   useEffect(() => {
-    if (nameData.length > 0 && locationData.length > 0) {
+    if (nameData.length > 0) {
       const formatChartData = () => {
         const entries = nameData[0].res.slice(0, 20);
         const labels = entries.map((entry) => entry.nome);
@@ -72,21 +73,10 @@ function PageName() {
         return { labels, data };
       };
 
-      const formatLocationData = () => {
-        const entries = locationData[0].res.slice(0, 10);
-        const labels = entries.map((entry) => entry.nome);
-        const data = entries.map((entry) => entry.frequencia);
-        return { labels, data };
-      };
-
       const chartData = formatChartData();
-      const locationChartData = formatLocationData();
 
       if (lineChartRef.current) {
         lineChartRef.current.destroy();
-      }
-      if (radarChartRef.current) {
-        radarChartRef.current.destroy();
       }
 
       const lineCtx = document.getElementById("lineChart") as HTMLCanvasElement;
@@ -112,6 +102,23 @@ function PageName() {
           },
         },
       });
+    }
+  }, [nameData]);
+
+  useEffect(() => {
+    if (locationData.length > 0) {
+      const formatLocationData = () => {
+        const entries = locationData[0].res.slice(0, 10);
+        const labels = entries.map((entry) => entry.nome);
+        const data = entries.map((entry) => entry.frequencia);
+        return { labels, data };
+      };
+
+      const locationChartData = formatLocationData();
+
+      if (radarChartRef.current) {
+        radarChartRef.current.destroy();
+      }
 
       const radarCtx = document.getElementById(
         "radarChart"
@@ -139,13 +146,12 @@ function PageName() {
         },
       });
     }
-  }, [nameData, locationData]);
+  }, [locationData]);
 
   return (
-    <div className='container'>
-      <div className='row'>
-
-        <div className='col-md-12'>
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
           <div className="card-line mb-3">
             <canvas id="lineChart"></canvas>
           </div>
@@ -153,6 +159,7 @@ function PageName() {
           <div className="card-line mb-3">
             <label>Escolha uma localidade:</label>
             <select
+              defaultValue="Guarapuava"
               onChange={(e) => {
                 let currentLocationNameInnerHtml = document.getElementById(
                   e.target.value
@@ -181,8 +188,8 @@ function PageName() {
         </div>
       </div>
 
-      <div className='row'>
-        <div className='col-md-12'>
+      <div className="row">
+        <div className="col-md-12">
           <div>
             <div className="card-line-name mb-3">
               <label>Escolha um nome:</label>
@@ -198,32 +205,32 @@ function PageName() {
                 Submit
               </button>
               <table>
-              <caption>
-                <b>Frequência do nome: </b>
-                <br />
-                {currentName}
-              </caption>
-              <thead>
-                <tr>
-                  <th>Período</th>
-                  <th>Frequência</th>
-                </tr>
-              </thead>
-              <tbody>
-                {nameFrequencyData.length > 0 &&
-                  nameFrequencyData[0].res.map((entry, index) => (
-                    <tr key={index}>
-                      <td>{entry.periodo.replace(/\[|\]/g, "")}</td>
-                      <td>{entry.frequencia}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+                <caption>
+                  <b>Frequência do nome: </b>
+                  <br />
+                  {currentName}
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Período</th>
+                    <th>Frequência</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {nameFrequencyData.length > 0 &&
+                    nameFrequencyData[0].res.map((entry, index) => (
+                      <tr key={index}>
+                        <td>{entry.periodo.replace(/\[|\]/g, "")}</td>
+                        <td>{entry.frequencia}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

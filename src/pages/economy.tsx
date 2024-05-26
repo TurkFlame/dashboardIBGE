@@ -6,8 +6,11 @@ export default function Economy() {
   const [totalPib, setTotalPib] = useState(null);
   const [pibPerCapita, setPibPerCapita] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentCountry, setCurrentCountry] = useState<String>("Brasil");
+  const [isLoadedPibPerCapita, setIsLoadedPibPerCapita] = useState(false);
+  const [isLoadedPibTotal, setIsLoadedPibTotal] = useState(false);
+  const [currentCountry, setCurrentCountry] = useState<string>("Brasil");
   const lineChartRef = useRef(null);
+  const barChartRef = useRef(null);
 
   const countries = {
     AF: "Afeganistão",
@@ -16,10 +19,7 @@ export default function Economy() {
     DE: "Alemanha",
     AD: "Andorra",
     AO: "Angola",
-    AI: "Anguilla",
-    AQ: "Antartica",
     AG: "Antígua e Barbuda",
-    AN: "Antilhas Holandesas",
     SA: "Arábia Saudita",
     DZ: "Argélia",
     AR: "Argentina",
@@ -61,25 +61,14 @@ export default function Economy() {
     HK: "Hong-Kong",
     HU: "Hungria",
     YE: "Iêmen",
-    BV: "Ilha Bouvet",
     IM: "Ilha do Homem",
-    CX: "Ilha Natal",
-    NF: "Ilha Norfalk",
     KY: "Ilhas Cayman",
-    CC: "Ilhas Cocos",
-    CK: "Ilhas Cook",
-    GG: "Ilhas do Canal",
     FO: "Ilhas Faroe",
-    HM: "Ilhas Heard e McDonald",
-    FK: "Ilhas Malvinas",
     MP: "Ilhas Marianas do Norte",
     MH: "Ilhas Marshall",
-    UM: "Ilhas Menores",
     SB: "Ilhas Salomão",
     TC: "Ilhas Turks e Caicos",
-    VG: "Ilhas Virgens (Britânicas)",
     VI: "Ilhas Virgens (U.S.)",
-    WF: "Ilhas Wallis e Futura",
     IN: "India",
     ID: "Indonésia",
     IR: "Irã",
@@ -90,14 +79,12 @@ export default function Economy() {
     IT: "Itália",
     JM: "Jamaica",
     JP: "Japão",
-    JE: "Jersey",
     PW: "Palau",
     PA: "Panamá",
     PG: "Papua Nova Guiné",
     PK: "Paquistão",
     PY: "Paraguai",
     PE: "Peru",
-    PN: "Pitcairn",
     PF: "Polinésia Francesa",
     PL: "Polônia",
     PR: "Porto Rico",
@@ -111,14 +98,10 @@ export default function Economy() {
     MD: "República da Moldova",
     CD: "República Dem. Do Congo",
     DO: "República Dominicana",
-    KP: "República Pop. Dem. da Coreia",
     CZ: "República Tcheca",
     TZ: "República Unida da Tanzânia",
-    RE: "Reunião",
     RO: "Romênia",
     RW: "Ruanda",
-    EH: "Saara Ocidental",
-    PM: "Saint Pierre e Miquelon",
     AS: "Samoa Americana",
     WS: "Samoa Ocidental",
     LC: "Santa Lúcia",
@@ -131,26 +114,38 @@ export default function Economy() {
     SD: "Sudão",
   };
 
-  const fetchData = async (sigla) => {
-
-    setIsLoaded(false);
-    const api = new Api();
-
+  const api = new Api();
+  async function loadPibTotal() {
+    setIsLoadedPibTotal(false);
     const pibData = await api.getTotalPIB();
     setTotalPib(pibData);
+    setIsLoadedPibTotal(true);
+  }
 
+  async function loadPibPerCapita(sigla) {
+    setIsLoadedPibPerCapita(false);
     const pibPerCapitaData = await api.getPIBPerCapita(sigla);
     setPibPerCapita(pibPerCapitaData);
-
-    setIsLoaded(true);
-  };
+    setIsLoadedPibPerCapita(true);
+  }
 
   useEffect(() => {
-    fetchData("BR");
+    setIsLoaded(false);
+    const loadData = async () => {
+      setIsLoaded(true);
+      await loadPibTotal();
+      await loadPibPerCapita("BR");
+    };
+
+    loadData();
   }, []);
 
   useEffect(() => {
     if (isLoaded) {
+      if (lineChartRef.current) {
+        console.log(lineChartRef.current)
+        lineChartRef.current.destroy();
+      }
       const formatChartData = () => {
         const entries = totalPib[0].series;
         const labels = entries.map((entry) => entry.pais.id);
@@ -159,15 +154,6 @@ export default function Economy() {
         );
         return { labels, data };
       };
-
-      const formatBarChartData = () => {
-        console.log("pib:", pibPerCapita);
-        const entries = pibPerCapita[0].series;
-        const labels = entries[0].serie.map((entry) => Object.keys(entry)[0]);
-        const data = entries[0].serie.map((entry) => Object.values(entry)[0]);
-        return { labels, data };
-      };
-
       const chartData = formatChartData();
 
       const lineCtx = document.getElementById("lineChart") as HTMLCanvasElement;
@@ -193,10 +179,25 @@ export default function Economy() {
           },
         },
       });
+    }
+  }, [isLoadedPibTotal]);
+
+  useEffect(() => {
+    if (isLoaded) {
+      if (barChartRef.current) {
+        console.log(barChartRef.current);
+        barChartRef.current.destroy();
+      }
+      const formatBarChartData = () => {
+        const entries = pibPerCapita[0].series;
+        const labels = entries[0].serie.map((entry) => Object.keys(entry)[0]);
+        const data = entries[0].serie.map((entry) => Object.values(entry)[0]);
+        return { labels, data };
+      };
 
       const barChartData = formatBarChartData();
       const barCtx = document.getElementById("barChart") as HTMLCanvasElement;
-      lineChartRef.current = new Chart(barCtx, {
+      barChartRef.current = new Chart(barCtx, {
         type: "bar",
         data: {
           labels: barChartData.labels,
@@ -220,7 +221,7 @@ export default function Economy() {
         },
       });
     }
-  }, [isLoaded]);
+  }, [isLoadedPibPerCapita]);
 
   return (
     <div>
@@ -233,12 +234,13 @@ export default function Economy() {
                   <canvas id="lineChart"></canvas>
                 </div>
                 <select
+                  defaultValue={currentCountry}
                   onChange={(e) => {
                     let currentLocationName = document.getElementById(
                       e.target.value
                     );
                     setCurrentCountry(currentLocationName.innerHTML);
-                    fetchData(currentLocationName.id);
+                    loadPibPerCapita(currentLocationName.id);
                   }}
                   name="locations"
                   id="locations_select"

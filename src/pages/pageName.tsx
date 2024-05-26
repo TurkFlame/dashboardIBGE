@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 import Api from "@/services/api";
-
+import '../index.css';
 function PageName() {
   const [nameData, setNameData] = useState([]);
   const [locationData, setLocationData] = useState([]);
@@ -155,7 +155,6 @@ function PageName() {
           <div className="card-line mb-3">
             <canvas id="lineChart"></canvas>
           </div>
-
           <div className="card-line mb-3">
             <label>Escolha uma localidade:</label>
             <select
@@ -192,24 +191,14 @@ function PageName() {
         <div className="col-md-12">
           <div>
             <div className="card-line-name mb-3">
-              <label>Escolha um nome:</label>
-              <input type="text" id="name-input" />
-              <button
-                onClick={() =>
-                  fetchNameFrequency(
-                    (document.getElementById("name-input") as HTMLInputElement)
-                      .value
-                  )
-                }
-              >
-                Submit
-              </button>
               <table>
                 <caption>
                   <b>Frequência do nome: </b>
                   <br />
-                  {currentName}
+                  <b>{currentName}</b>
                 </caption>
+              </table>
+              <table>
                 <thead>
                   <tr>
                     <th>Período</th>
@@ -226,11 +215,24 @@ function PageName() {
                     ))}
                 </tbody>
               </table>
+              <label>Escolha um nome:</label>
+              <input type="text" id="name-input" />
+              <button
+                onClick={() =>
+                  fetchNameFrequency(
+                    (document.getElementById("name-input") as HTMLInputElement)
+                      .value
+                  )
+                }
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   );
 }
 

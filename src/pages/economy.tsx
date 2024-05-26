@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Api from "../services/api";
 import Chart from "chart.js/auto";
+import '../index.css';
 
 export default function Economy() {
   const [totalPib, setTotalPib] = useState(null);

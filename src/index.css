@@ -217,7 +217,7 @@ caption {
 }
 
 .my-navbar-logo{
-  margin-right: 50px;
+  justify-self: center;
   color: #fff;
   text-decoration: none;
   font-size: 30px;
@@ -279,32 +279,38 @@ caption {
 .image-title-container {
   width: 100%;
   height: 300px; 
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding-bottom: 15px;
 }
 
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover; 
-  
 }
 
 .title {
-  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 5px;
   width: 80%;
   text-align: center;
   margin-top: 45px;
+  display: block;
+
 }
+
+.link-invisivel > .title{
+  top: 0%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto !important;
+}
+
 /* PAGINA NAME */
 .card-line-name {
   width: 500px;
@@ -333,4 +339,8 @@ caption {
   margin: 20px 0;
   font-size: large;
   text-align: center;
+}
+
+img{ 
+  border-radius: 15px;
 }

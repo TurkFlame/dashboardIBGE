@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Api from "../services/api";
 import Chart from "chart.js/auto";
+import PageContainer from "@/components/pageContainer";
 
 export default function Economy() {
   const [totalPib, setTotalPib] = useState(null);
@@ -224,41 +225,44 @@ export default function Economy() {
   }, [isLoadedPibPerCapita]);
 
   return (
-    <div>
-      {isLoaded && (
-        <>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="card-line mb-3">
-                  <canvas id="lineChart"></canvas>
-                </div>
-                <select
-                  defaultValue={currentCountry}
-                  onChange={(e) => {
-                    let currentLocationName = document.getElementById(
-                      e.target.value
-                    );
-                    setCurrentCountry(currentLocationName.innerHTML);
-                    loadPibPerCapita(currentLocationName.id);
-                  }}
-                  name="locations"
-                  id="locations_select"
-                >
-                  {Object.keys(countries).map((element) => (
-                    <option key={element} id={element} value={element}>
-                      {countries[element]}
-                    </option>
-                  ))}
-                </select>
-                <div className="card-line bar-chart-container">
-                  <canvas id="barChart" className="bar-chart"></canvas>
+    <PageContainer>
+      <div>
+        {isLoaded && (
+          <>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="card-line mb-3">
+                    <canvas id="lineChart"></canvas>
+                  </div>
+                  <select
+                    defaultValue={currentCountry}
+                    onChange={(e) => {
+                      let currentLocationName = document.getElementById(
+                        e.target.value
+                      );
+                      setCurrentCountry(currentLocationName.innerHTML);
+                      loadPibPerCapita(currentLocationName.id);
+                    }}
+                    name="locations"
+                    id="locations_select"
+                  >
+                    {Object.keys(countries).map((element) => (
+                      <option key={element} id={element} value={element}>
+                        {countries[element]}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="card-line bar-chart-container">
+                    <canvas id="barChart" className="bar-chart"></canvas>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </PageContainer>
+
   );
 }

@@ -104,6 +104,7 @@ export default function PageSearch() {
   }, [newData]);
 
   return (
+    
     <div>
       <div className='container' id='search-container'>
         <div className='row'>

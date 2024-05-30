@@ -18,7 +18,12 @@ function PageName() {
   const fetchData = async () => {
     try {
       const nameDataResponse = await api.getNameRanking();
-      setNameData(nameDataResponse);
+      // Filtra nomes duplicados
+      const uniqueNameData = nameDataResponse.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.nome === value.nome)
+      );
+      setNameData(uniqueNameData);
     } catch (error) {
       console.error("Erro ao buscar dados da API:", error);
     }
@@ -27,7 +32,12 @@ function PageName() {
   const fetchDataLocation = async ($id = "4109401") => {
     try {
       const locationDataResponse = await api.getNameFrequencyRegion($id);
-      setLocationData(locationDataResponse);
+      // Filtra localidades duplicadas
+      const uniqueLocationData = locationDataResponse.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.nome === value.nome)
+      );
+      setLocationData(uniqueLocationData);
     } catch (error) {
       console.error("Erro ao buscar dados da API:", error);
     }
@@ -36,7 +46,12 @@ function PageName() {
   const fetchNameFrequency = async (name = "Maria") => {
     try {
       const frequencyName = await api.getNameFrequency(name);
-      setNameFrequencyData(frequencyName);
+      // Filtra dados de frequência de nomes duplicados
+      const uniqueNameFrequency = frequencyName.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.periodo === value.periodo)
+      );
+      setNameFrequencyData(uniqueNameFrequency);
       setCurrentName(name);
     } catch (error) {
       console.error(
@@ -50,7 +65,13 @@ function PageName() {
     try {
       if (locations.length < 1) {
         const locations_response = await api.getLocations();
-        setLocations(locations_response);
+        // Usar um Set para garantir unicidade dos IDs das localidades
+        const uniqueLocationsMap = new Map();
+        locations_response.forEach((location) => {
+          uniqueLocationsMap.set(location.municipio.id, location);
+        });
+        const uniqueLocations = Array.from(uniqueLocationsMap.values());
+        setLocations(uniqueLocations);
       }
     } catch (error) {
       console.error("Erro ao buscar dados da API:", error);

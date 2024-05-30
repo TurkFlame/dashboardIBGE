@@ -207,7 +207,7 @@
    align-items: center;
    height: 250px;
  }
-
+/* Barra de navegação */
  .my-navbar {
    background-color: #242424;
    position: fixed;
@@ -247,7 +247,7 @@
  .my-navbar-link:hover {
    color: #ccc;
  }
-
+/* Cards */
  .card-top {
    width: 100%;
    padding: 10px;
@@ -388,3 +388,93 @@
  img {
    border-radius: 15px;
  }
+
+ /* Sobre Nos */
+ .main-content {
+  color: #333;
+  display: grid;
+  place-items: center;
+  padding-top: 80px; /* Espaço suficiente para a navbar */
+  flex: 1;
+}
+
+.sobre-nos-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+}
+
+.sobre-nos-container h1,
+.sobre-nos-container h2 {
+  color: #333;
+}
+
+.sobre-nos-container p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.sobre-nos-container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.sobre-nos-container li {
+  margin-bottom: 10px;
+}
+
+/* Página contato */
+.contato-container {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+}
+
+.contato-container h1,
+.contato-container h2 {
+  color: #333;
+}
+
+.contato-container p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.contato-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contato-container label {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.contato-container input,
+.contato-container textarea {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.contato-container button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contato-container button:hover {
+  background-color: #555;
+}

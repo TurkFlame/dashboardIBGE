@@ -29,12 +29,16 @@ const SobreNos: React.FC = () => {
         <section>
           <h3>Nossos Valores</h3>
           <hr className='mt-1' />
+          <p>
+            Nós como Engenheiros de software sempre estamos empenhados para entregar o melhor projeto,
+            por isso prezamos por:
+          </p>
           <ul className='mb-3'>
-            <li>Inovação</li>
-            <li>Qualidade</li>
-            <li>Sustentabilidade</li>
-            <li>Integridade</li>
-            <li>Responsabilidade Social</li>
+            <li><b>Busca constante</b> por novas soluções e tecnologias para aprimorar nossos projetos.</li>
+            <li><b>Garantimos</b> que nossos produtos atendam aos mais altos padrões de excelência.</li>
+            <li><b>Desenvolvemos software</b> com foco na eficiência e uso responsável dos recursos.</li>
+            <li><b>Atuamos com transparência</b> e ética em todas as etapas do desenvolvimento.</li>
+            <li><b>Contribuímos para a sociedade</b> através de projetos que fazem a diferença.</li>
           </ul>
         </section>
       </div>
@@ -44,17 +48,16 @@ const SobreNos: React.FC = () => {
           <h3>Conheça Nossa Equipe</h3>
           <hr className='mt-1' />
           <p className='mb-3'>
-            Nossa equipe é composta por alunos do Centro universitário Campo Real e
-            apaixonados pelo que fazem. Ao todo trabalhamos em 5 para a entrega deste projeto para 
-            entregar o melhor para nossos projetos.
+            Nossa equipe é composta por cinco alunos do Centro universitário Campo Real
+            apaixonados pelo que fazem.
           </p>
 
           <ul className='mb-3'>
-            <li>Bryan Mernick</li>
-            <li>Gabriel Vinicius Amtunes</li>
-            <li>Luisão</li>
-            <li>Ives Eduardo de Lara kracoki</li>
-            <li>Weslley césar zampier</li>
+            <li><b>Bryan Mernick</b></li>
+            <li><b>Gabriel Vinicius Amtunes</b></li>
+            <li><b>Luisão</b></li>
+            <li><b>Ives Eduardo de Lara kracoki</b></li>
+            <li><b>Weslley césar zampier</b></li>
           </ul>
         </section>
       </div>

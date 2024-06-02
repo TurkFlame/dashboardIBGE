@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Api from "../services/api";
 import Chart from "chart.js/auto";
-import PageContainer from "@/components/pageContainer";
 
 export default function Economy() {
   const [totalPib, setTotalPib] = useState(null);
@@ -225,7 +224,6 @@ export default function Economy() {
   }, [isLoadedPibPerCapita]);
 
   return (
-    <PageContainer>
       <div>
         {isLoaded && (
           <>
@@ -262,7 +260,6 @@ export default function Economy() {
           </>
         )}
       </div>
-    </PageContainer>
 
   );
 }

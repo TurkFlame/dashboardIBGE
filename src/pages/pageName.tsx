@@ -172,13 +172,13 @@ function PageName() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-6 mt-content">
           <div className="card-line mb-3">
             <canvas id="lineChart"></canvas>
           </div>
 
-          <div className="card-line mb-3">
-            <label>Escolha uma localidade:</label>
+          <div className="card-line mb-2">
+            <label>Escolha uma localidade: </label>
             <select
               defaultValue="Guarapuava"
               onChange={(e) => {
@@ -210,27 +210,13 @@ function PageName() {
       </div>
 
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-6">
           <div>
             <div className="card-line-name mb-3">
-              <label>Escolha um nome:</label>
-              <input type="text" id="name-input" />
-              <button
-                onClick={() =>
-                  fetchNameFrequency(
-                    (document.getElementById("name-input") as HTMLInputElement)
-                      .value
-                  )
-                }
-              >
-                Submit
-              </button>
+              <div className="mb-3">
+                <h5><b>Frequência do nome: </b>{currentName}</h5>
+              </div>
               <table>
-                <caption>
-                  <b>Frequência do nome: </b>
-                  <br />
-                  {currentName}
-                </caption>
                 <thead>
                   <tr>
                     <th>Período</th>
@@ -247,6 +233,18 @@ function PageName() {
                     ))}
                 </tbody>
               </table>
+              <label>Insira um nome:</label>
+              <input type="text" id="name-input" />
+              <button
+                onClick={() =>
+                  fetchNameFrequency(
+                    (document.getElementById("name-input") as HTMLInputElement)
+                      .value
+                  )
+                }
+              >
+                Pesquisar
+              </button>
             </div>
           </div>
         </div>

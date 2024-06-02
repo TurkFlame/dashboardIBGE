@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <nav className="my-navbar d-flex p-2">
+    <nav className="my-navbar d-flex">
       <div className="navbar-logo-container">
         <Link to='/' className="my-navbar-logo">
           EASY INFO

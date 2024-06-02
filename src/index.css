@@ -251,9 +251,9 @@
    color: #8d8d8d;
  }
 
- .icon-navbar{
-  font-size: 15px;
-  margin: 0 5px;
+ .icon-navbar {
+   font-size: 15px;
+   margin: 0 5px;
  }
 
  /* Cards */
@@ -365,8 +365,9 @@
    color: #333;
    display: grid;
    place-items: center;
-   padding-top: 80px;
-   /* Espaço suficiente para a navbar */
+   grid-template-columns: repeat(2, 1fr);
+   gap: 20px;
+   padding: 20px;
    flex: 1;
  }
 
@@ -424,8 +425,8 @@
  }
 
  .contato-container label {
-   margin-bottom: 10px;
-   color: #333;
+   margin-bottom: 5px;
+   font-weight: bold;
  }
 
  .contato-container input,

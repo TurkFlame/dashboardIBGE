@@ -109,7 +109,7 @@ export default function PageSearch() {
       <div className='container' id='search-container'>
         <div className='row'>
 
-          <div className='col-md-12'>
+          <div className='col-md-12 mt-3'>
             <div className='card-label'>
               <div className="sector-header">
                 <p><b>Total de Pesquisas Realizadas Pelo IBGE</b></p>
@@ -121,14 +121,11 @@ export default function PageSearch() {
             </div>
           </div>
 
-
           <div className='col-md-6'>
             <div className='card-line'>
               <canvas id="lineChart"></canvas>
             </div>
           </div>
-
-
         </div>
 
         <div className='row'>

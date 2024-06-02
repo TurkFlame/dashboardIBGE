@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Api from "../services/api";
 import Chart from "chart.js/auto";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoneyBillTrendUp, faEarthAmerica } from '@fortawesome/free-solid-svg-icons';
 
 export default function Economy() {
   const [totalPib, setTotalPib] = useState(null);
@@ -224,15 +226,24 @@ export default function Economy() {
   }, [isLoadedPibPerCapita]);
 
   return (
-      <div>
-        {isLoaded && (
-          <>
-            <div className="container">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="card-line mb-3">
-                    <canvas id="lineChart"></canvas>
-                  </div>
+    <div>
+      {isLoaded && (
+        <>
+          <div className="container">
+            <div className="row mt-5">
+              <div className="col-md-6 mt-5">
+                <div className="card-line mb-3 mt-5 sector-header">
+                  <h5>PIB per capita por país</h5>
+                  <FontAwesomeIcon icon={faMoneyBillTrendUp} className="icon" />
+                </div>
+                <div className="card-line ">
+                  <canvas id="lineChart"></canvas>
+                </div>
+              </div>
+
+              <div className="col-md-6 mt-5">
+                <div className="card-line mb-3 mt-5 sector-header">
+                  <h5>País selecionado: </h5>
                   <select
                     defaultValue={currentCountry}
                     onChange={(e) => {
@@ -251,15 +262,19 @@ export default function Economy() {
                       </option>
                     ))}
                   </select>
-                  <div className="card-line bar-chart-container">
-                    <canvas id="barChart" className="bar-chart"></canvas>
-                  </div>
+
+                  <FontAwesomeIcon icon={faEarthAmerica} className="icon" />
+
+                </div>
+                <div className="card-line bar-chart-container">
+                  <canvas id="barChart" className="bar-chart"></canvas>
                 </div>
               </div>
             </div>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
+    </div>
 
   );
 }

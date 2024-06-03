@@ -54,10 +54,10 @@ const SobreNos: React.FC = () => {
 
           <ul className='mb-3'>
             <li><b>Bryan Mernick</b></li>
-            <li><b>Gabriel Vinicius Amtunes</b></li>
-            <li><b>Luisão</b></li>
-            <li><b>Ives Eduardo de Lara kracoki</b></li>
-            <li><b>Weslley césar zampier</b></li>
+            <li><b>Gabriel Vinicius Antunes</b></li>
+            <li><b>Luiz Felipe Marcondes</b></li>
+            <li><b>Ives Eduardo de Lara Kracoki</b></li>
+            <li><b>Weslley Cesar Zampier</b></li>
           </ul>
         </section>
       </div>

@@ -3,7 +3,7 @@ import '../index.css';
 
 const SobreNos: React.FC = () => {
   return (
-    <div className="main-content mt-5">
+    <div className="main-content mt-5 content-center">
       <div className="sobre-nos-container">
         <h3>Sobre Nós</h3>
         <hr className='mt-1' />
@@ -12,10 +12,8 @@ const SobreNos: React.FC = () => {
           utilizando a API gratuita do IBGE e trazendo dados em formas de gráficos e
           tabelas para demonstração dessas pesquisas.
         </p>
-      </div>
 
-      <div className="sobre-nos-container">
-        <section>
+        <section className='mt-5'>
           <h3>Nossa História</h3>
           <hr className='mt-1' />
           <p className='mb-3'>
@@ -23,10 +21,8 @@ const SobreNos: React.FC = () => {
             as areas, fazendo possivel entregar esse projeto incrivel que estamos vendo.
           </p>
         </section>
-      </div>
 
-      <div className="sobre-nos-container">
-        <section>
+        <section className='mt-5'>
           <h3>Nossos Valores</h3>
           <hr className='mt-1' />
           <p>
@@ -41,10 +37,8 @@ const SobreNos: React.FC = () => {
             <li><b>Contribuímos para a sociedade</b> através de projetos que fazem a diferença.</li>
           </ul>
         </section>
-      </div>
 
-      <div className="sobre-nos-container">
-        <section>
+        <section className='mt-5'>
           <h3>Conheça Nossa Equipe</h3>
           <hr className='mt-1' />
           <p className='mb-3'>
@@ -61,6 +55,7 @@ const SobreNos: React.FC = () => {
           </ul>
         </section>
       </div>
+
     </div>
   );
 };

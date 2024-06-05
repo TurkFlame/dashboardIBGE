@@ -70,8 +70,30 @@ export default function PageSearch() {
       },
       options: {
         scales: {
+          x: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)'
+            },
+            ticks: {
+              color: 'white'
+            }
+          },
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)'
+            },
+            ticks: {
+              color: 'white'
+            }
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white'
+            }
           }
         }
       }
@@ -104,11 +126,12 @@ export default function PageSearch() {
   }, [newData]);
 
   return (
+    
     <div>
-      <div className='container'>
+      <div className='container' id='search-container'>
         <div className='row'>
 
-          <div className='col-md-12'>
+          <div className='col-md-12 mt-3'>
             <div className='card-label'>
               <div className="sector-header">
                 <p><b>Total de Pesquisas Realizadas Pelo IBGE</b></p>
@@ -120,14 +143,11 @@ export default function PageSearch() {
             </div>
           </div>
 
-
           <div className='col-md-6'>
             <div className='card-line'>
               <canvas id="lineChart"></canvas>
             </div>
           </div>
-
-
         </div>
 
         <div className='row'>

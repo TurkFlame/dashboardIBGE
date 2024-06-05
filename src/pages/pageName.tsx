@@ -18,7 +18,12 @@ function PageName() {
   const fetchData = async () => {
     try {
       const nameDataResponse = await api.getNameRanking();
-      setNameData(nameDataResponse);
+      // Filtra nomes duplicados
+      const uniqueNameData = nameDataResponse.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.nome === value.nome)
+      );
+      setNameData(uniqueNameData);
     } catch (error) {
       console.error("Erro ao buscar dados da API:", error);
     }
@@ -27,7 +32,12 @@ function PageName() {
   const fetchDataLocation = async ($id = "4109401") => {
     try {
       const locationDataResponse = await api.getNameFrequencyRegion($id);
-      setLocationData(locationDataResponse);
+      // Filtra localidades duplicadas
+      const uniqueLocationData = locationDataResponse.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.nome === value.nome)
+      );
+      setLocationData(uniqueLocationData);
     } catch (error) {
       console.error("Erro ao buscar dados da API:", error);
     }
@@ -36,7 +46,12 @@ function PageName() {
   const fetchNameFrequency = async (name = "Maria") => {
     try {
       const frequencyName = await api.getNameFrequency(name);
-      setNameFrequencyData(frequencyName);
+      // Filtra dados de frequência de nomes duplicados
+      const uniqueNameFrequency = frequencyName.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.periodo === value.periodo)
+      );
+      setNameFrequencyData(uniqueNameFrequency);
       setCurrentName(name);
     } catch (error) {
       console.error(
@@ -48,9 +63,16 @@ function PageName() {
 
   const fetchRegions = async () => {
     try {
-      const locations = await api.getLocations();
-      console.log(locations);
-      setLocations(locations);
+      if (locations.length < 1) {
+        const locations_response = await api.getLocations();
+        // Usar um Set para garantir unicidade dos IDs das localidades
+        const uniqueLocationsMap = new Map();
+        locations_response.forEach((location) => {
+          uniqueLocationsMap.set(location.municipio.id, location);
+        });
+        const uniqueLocations = Array.from(uniqueLocationsMap.values());
+        setLocations(uniqueLocations);
+      }
     } catch (error) {
       console.error("Erro ao buscar dados da API:", error);
     }
@@ -64,7 +86,7 @@ function PageName() {
   }, []);
 
   useEffect(() => {
-    if (nameData.length > 0 && locationData.length > 0) {
+    if (nameData.length > 0) {
       const formatChartData = () => {
         const entries = nameData[0].res.slice(0, 20);
         const labels = entries.map((entry) => entry.nome);
@@ -72,24 +94,14 @@ function PageName() {
         return { labels, data };
       };
 
-      const formatLocationData = () => {
-        const entries = locationData[0].res.slice(0, 10);
-        const labels = entries.map((entry) => entry.nome);
-        const data = entries.map((entry) => entry.frequencia);
-        return { labels, data };
-      };
-
       const chartData = formatChartData();
-      const locationChartData = formatLocationData();
 
       if (lineChartRef.current) {
         lineChartRef.current.destroy();
       }
-      if (radarChartRef.current) {
-        radarChartRef.current.destroy();
-      }
 
       const lineCtx = document.getElementById("lineChart") as HTMLCanvasElement;
+
       lineChartRef.current = new Chart(lineCtx, {
         type: "line",
         data: {
@@ -106,12 +118,52 @@ function PageName() {
         },
         options: {
           scales: {
+            x: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
+            },
             y: {
               beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
             },
           },
-        },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white'
+              }
+            }
+          }
+        }
       });
+
+    }
+  }, [nameData]);
+
+  useEffect(() => {
+    if (locationData.length > 0) {
+      const formatLocationData = () => {
+        const entries = locationData[0].res.slice(0, 10);
+        const labels = entries.map((entry) => entry.nome);
+        const data = entries.map((entry) => entry.frequencia);
+        return { labels, data };
+      };
+
+      const locationChartData = formatLocationData();
+
+      if (radarChartRef.current) {
+        radarChartRef.current.destroy();
+      }
 
       const radarCtx = document.getElementById(
         "radarChart"
@@ -134,25 +186,41 @@ function PageName() {
           scales: {
             r: {
               beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              pointLabels: {
+                color: 'white'
+              }
             },
           },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#fff'
+              }
+            }
+          }
         },
       });
     }
-  }, [nameData, locationData]);
+  }, [locationData]);
 
   return (
-    <div className='container'>
-      <div className='row'>
-
-        <div className='col-md-12'>
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6 mt-content">
           <div className="card-line mb-3">
             <canvas id="lineChart"></canvas>
           </div>
 
-          <div className="card-line mb-3">
-            <label>Escolha uma localidade:</label>
+          <div className="card-line mb-2">
+            <label>Escolha uma localidade: </label>
             <select
+              defaultValue="Guarapuava"
               onChange={(e) => {
                 let currentLocationNameInnerHtml = document.getElementById(
                   e.target.value
@@ -181,52 +249,47 @@ function PageName() {
         </div>
       </div>
 
-      <div className='row'>
-        <div className='col-md-12'>
-
-          <div className="card-line mb-3">
-            <label>Escolha um nome:</label>
-            <input type="text" id="name-input" />
-            <button
-              onClick={() =>
-                fetchNameFrequency(
-                  (document.getElementById("name-input") as HTMLInputElement)
-                    .value
-                )
-              }
-            >
-              Submit
-            </button>
+      <div className="row">
+        <div className="col-md-6">
+          <div>
+            <div className="card-line-name mb-3">
+              <div className="mb-3">
+                <h5><b>Frequência do nome: </b>{currentName}</h5>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Período</th>
+                    <th>Frequência</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {nameFrequencyData.length > 0 &&
+                    nameFrequencyData[0].res.map((entry, index) => (
+                      <tr key={index}>
+                        <td>{entry.periodo.replace(/\[|\]/g, "")}</td>
+                        <td>{entry.frequencia}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+              <label>Insira um nome:</label>
+              <input type="text" id="name-input" />
+              <button className="btn btn-primary"
+                onClick={() =>
+                  fetchNameFrequency(
+                    (document.getElementById("name-input") as HTMLInputElement)
+                      .value
+                  )
+                }
+              >
+                Pesquisar
+              </button>
+            </div>
           </div>
-
-          <div className="card-table">
-            <table className="table">
-              <caption>
-                <b>Frequência do nome: </b>
-                <br />
-                {currentName}
-              </caption>
-              <thead>
-                <tr>
-                  <th>Período</th>
-                  <th>Frequência</th>
-                </tr>
-              </thead>
-              <tbody>
-                {nameFrequencyData.length > 0 &&
-                  nameFrequencyData[0].res.map((entry, index) => (
-                    <tr key={index}>
-                      <td>{entry.periodo.replace(/\[|\]/g, "")}</td>
-                      <td>{entry.frequencia}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

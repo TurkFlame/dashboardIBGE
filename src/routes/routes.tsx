@@ -4,18 +4,17 @@ import Entrance from "../pages/entrance";
 import Economy from "../pages/economy";
 import PageName from "../pages/pageName";
 import PageSearch from "../pages/pageSearch";
-import Dashboards from "../pages/dashboards";
-
+import SobreNos from '@/pages/sobreNos';
+import Contato from '@/pages/contato';
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<Entrance />} />
       <Route path="/page-name" element={<PageName />} />
       <Route path="/page-search" element={<PageSearch />} />
-      {/* Tela para ir para o cadastro */}
-      <Route path="/dashboards" element={<Dashboards />} /> {/**/}
       <Route path="/page-economy" element={<Economy />} />{" "}
-      {/* Tela para cada dashboard */}
+      <Route path='/sobre-nos' element={<SobreNos/>}/>
+      <Route path='/contato' element={<Contato/>}/>
     </Routes>
   );
 }

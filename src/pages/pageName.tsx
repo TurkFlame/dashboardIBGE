@@ -211,7 +211,7 @@ function PageName() {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row mt-4">
         <div className="col-md-6 mt-content">
           <div className="card-line mb-3">
             <canvas id="lineChart"></canvas>

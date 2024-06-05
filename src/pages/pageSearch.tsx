@@ -129,8 +129,7 @@ export default function PageSearch() {
     
     <div>
       <div className='container' id='search-container'>
-        <div className='row'>
-
+        <div className='row mt-5'>
           <div className='col-md-12 mt-3'>
             <div className='card-label'>
               <div className="sector-header">
@@ -150,8 +149,8 @@ export default function PageSearch() {
           </div>
         </div>
 
-        <div className='row'>
-          <div className='col-md-12'>
+        <div className='row mt-5'>
+          <div className='col-md-12 mt-5'>
             <div className='card-label'>
               <div className="sector-header">
                 <p><b>Quantidade de Anos em que o IBGE conduziu pesquisas</b></p>

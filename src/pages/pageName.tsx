@@ -101,6 +101,7 @@ function PageName() {
       }
 
       const lineCtx = document.getElementById("lineChart") as HTMLCanvasElement;
+
       lineChartRef.current = new Chart(lineCtx, {
         type: "line",
         data: {
@@ -117,12 +118,35 @@ function PageName() {
         },
         options: {
           scales: {
+            x: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
+            },
             y: {
               beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
             },
           },
-        },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white'
+              }
+            }
+          }
+        }
       });
+
     }
   }, [nameData]);
 
@@ -162,8 +186,24 @@ function PageName() {
           scales: {
             r: {
               beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              pointLabels: {
+                color: 'white'
+              }
             },
           },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#fff'
+              }
+            }
+          }
         },
       });
     }
@@ -235,7 +275,7 @@ function PageName() {
               </table>
               <label>Insira um nome:</label>
               <input type="text" id="name-input" />
-              <button
+              <button className="btn btn-primary"
                 onClick={() =>
                   fetchNameFrequency(
                     (document.getElementById("name-input") as HTMLInputElement)

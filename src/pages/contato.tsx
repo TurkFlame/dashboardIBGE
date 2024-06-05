@@ -3,7 +3,7 @@ import '@/index.css';
 
 const Contato: React.FC = () => {
   return (
-      <div className="main-content">
+      <div className="main-content content-center">
         <div className="contato-container">
           <h3>Contato</h3>
           <hr></hr>
@@ -21,7 +21,7 @@ const Contato: React.FC = () => {
             <label htmlFor="mensagem">Mensagem:</label>
             <textarea id="mensagem" name="mensagem" placeholder='Informe sua mensagem'  required></textarea>
             
-            <button type="submit">Enviar</button>
+            <button className="btn btn-primary" type="submit">Enviar</button>
           </form>
         </div>
       </div>

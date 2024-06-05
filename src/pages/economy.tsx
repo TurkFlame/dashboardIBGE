@@ -175,11 +175,33 @@ export default function Economy() {
         },
         options: {
           scales: {
+            x: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
+            },
             y: {
               beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
             },
           },
-        },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white'
+              }
+            }
+          }
+        }
       });
     }
   }, [isLoadedPibTotal]);
@@ -216,11 +238,33 @@ export default function Economy() {
         },
         options: {
           scales: {
+            x: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
+            },
             y: {
               beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: 'white'
+              }
             },
           },
-        },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white'
+              }
+            }
+          }
+        }
       });
     }
   }, [isLoadedPibPerCapita]);
@@ -233,7 +277,7 @@ export default function Economy() {
             <div className="row mt-5">
               <div className="col-md-6 mt-5">
                 <div className="card-line mb-3 mt-5 sector-header">
-                  <h5>PIB per capita por país</h5>
+                  <h5><b>PIB per capita por país</b></h5>
                   <FontAwesomeIcon icon={faMoneyBillTrendUp} className="icon" />
                 </div>
                 <div className="card-line ">

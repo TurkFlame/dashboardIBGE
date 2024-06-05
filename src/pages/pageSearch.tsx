@@ -70,8 +70,30 @@ export default function PageSearch() {
       },
       options: {
         scales: {
+          x: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)'
+            },
+            ticks: {
+              color: 'white'
+            }
+          },
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)'
+            },
+            ticks: {
+              color: 'white'
+            }
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white'
+            }
           }
         }
       }
